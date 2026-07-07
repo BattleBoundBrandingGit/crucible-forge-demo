@@ -20,10 +20,10 @@ This document defines what **this public showcase repository** includes and what
 | **Ecosystem overview** | High-level roles of The Crucible, Core, Forge, Forge Brain, Aether, Siege, and Barrage |
 | **Forge Brain prototype** | Planned interactive graph demo — not yet in this repository |
 | **High-level architecture** | Layered system diagram, entity-relationship model (abstract), data flow (simplified) |
-| **Conceptual diagrams** | Mermaid ecosystem and knowledge graph illustrations in README |
+| **Conceptual diagrams** | Mermaid system architecture, knowledge flow, roadmap, and entity graph — [diagrams.md](diagrams.md) |
 | **Roadmap** | Alpha, Beta, and Future phases with honest development status |
 | **Visual assets** | Planned screenshots and GIFs — **not created yet**; placeholder paths documented only |
-| **Documentation** | README, vision, architecture, roadmap, and this IP boundary document |
+| **Documentation** | README, vision, architecture, roadmap, diagrams, and this IP boundary document |
 
 ### Acceptable Level of Detail
 
@@ -75,7 +75,7 @@ This document defines what **this public showcase repository** includes and what
 | **The Crucible** (platform) | Vision & positioning only | Principles, ecosystem map, long-term direction |
 | **Core** (engine/runtime) | Architecture diagram only | Abstract role — no implementation |
 | **Forge** (desktop workspace) | Referenced, not included | Described as the host for Forge Brain |
-| **Forge Brain** (graph surface) | **Documentation + diagrams only** | Conceptual mermaid diagrams; prototype and visual assets planned |
+| **Forge Brain** (graph surface) | **Documentation + diagrams only** | Mermaid visuals; interactive prototype planned |
 | **Aether** (intelligence layer) | Aether mode UI preview only | Conceptual overlay — no intelligence internals |
 | **Siege** (integration platform) | Roadmap reference only | Planned — no code or specs |
 | **Barrage** (cloud/team platform) | Roadmap reference only | Planned — no code or specs |

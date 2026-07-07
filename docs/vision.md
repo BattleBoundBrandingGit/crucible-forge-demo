@@ -16,7 +16,7 @@ Chat interfaces solved the *access* problem. They did not solve the *operating* 
 
 ## The Thesis
 
-**The Crucible is a long-term AI software ecosystem** — not a single app. It is the umbrella platform where knowledge, context, agents, and workflows are first-class entities that persist locally, compose across sessions, and connect through disciplined API usage.
+**The Crucible is an AI Knowledge Operating System (AKOS)** — a long-term software ecosystem, not a single app. It is the umbrella platform where knowledge, context, agents, and workflows persist locally, compose across sessions, and connect through disciplined API usage.
 
 The platform is built on three foundational principles:
 
@@ -46,6 +46,23 @@ The Crucible is the **platform**. Individual products serve distinct roles withi
 | **Barrage** | Future cloud and team platform — shared workspaces and collaboration at scale |
 
 No single product is The Crucible. The value is in how they compose.
+
+### Intelligence Architecture (Conceptual)
+
+Beneath the ecosystem products, Core hosts a layered intelligence model — described at a high level only in this public showcase:
+
+| Concept | Role |
+|---------|------|
+| **Big Brain** | Central orchestration — coordinates context, routes work |
+| **Mini Brains** | Scoped specialists for projects, domains, or workflows |
+| **Baby Brains** | Lightweight task-level units for focused execution |
+| **Skills Library** | Reusable capabilities shared across all brain tiers |
+| **Experience Engine** | Learning loop — outcomes refine future context |
+| **Brain Gardener** | Curates and maintains knowledge health over time |
+
+Forge Brain makes this architecture **visible** on the graph surface. Aether connects intelligence to active context. Implementation details remain private.
+
+See the full system diagram: [diagrams.md](diagrams.md#1-system-architecture)
 
 ## Product Philosophy
 
@@ -108,6 +125,30 @@ Forge Brain is the **visual intelligence layer inside Forge**. It is how builder
 - Preview how Aether surfaces relevant knowledge in context
 
 Forge Brain does not replace Core, Aether, or any other product. It is the graph surface that makes the platform legible.
+
+## Knowledge Flow (Conceptual)
+
+How the platform is designed to compound builder knowledge over time:
+
+```mermaid
+flowchart LR
+    user(["Builder"])
+    forge["Forge"]
+    bb["Big Brain"]
+    kg["Knowledge Graph"]
+    skills["Skills / Mini Brains"]
+    model["Claude or Other Model"]
+    response["Scoped Response"]
+    ee["Experience Engine"]
+    brain["Brain Layer"]
+
+    user --> forge --> bb --> kg --> skills --> model --> response
+    response --> ee --> brain --> kg
+    brain -.-> bb
+    response --> forge --> user
+```
+
+*Logical flow — not production code. Annotated version: [diagrams.md](diagrams.md#2-knowledge-flow)*
 
 ---
 

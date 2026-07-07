@@ -2,9 +2,9 @@
 
 **Visual intelligence layer for The Crucible**
 
-Forge Brain is the **early visual layer** inside [Forge](docs/vision.md) — the desktop workspace for The Crucible, a long-term AI software ecosystem built around **local-first intelligence**, **composable context**, and **disciplined API usage**.
+Forge Brain is the **early visual layer** inside [Forge](docs/vision.md) — the desktop workspace for **The Crucible**, an AI Knowledge Operating System (AKOS) built around **local-first intelligence**, **composable context**, and **disciplined API usage**.
 
-This repository is an **early public showcase** — documentation and product positioning for a product under active development. It explains how Forge Brain will help builders visualize relationships across projects, prompts, files, agents, memories, skills, models, workflows, clients, and knowledge. There is **no interactive demo or visual media in this repo yet**; diagrams below convey the concept until assets and a prototype are ready.
+This repository is an **early public showcase** for builder program review. It contains documentation and **conceptual Mermaid diagrams** — not production code, not a finished UI, and not the private engine that powers the platform.
 
 ---
 
@@ -12,86 +12,172 @@ This repository is an **early public showcase** — documentation and product po
 
 | | |
 |---|---|
-| **What this repo is** | An early public showcase — documentation, diagrams, and product positioning for Forge Brain |
-| **What this repo is not** | A shipped product, production platform, interactive demo, or proprietary engine |
+| **What this repo is** | Early public showcase — vision, architecture diagrams, and Forge Brain product positioning |
+| **What this repo is not** | Production repo, shipped product, interactive demo, or proprietary implementation |
 
-The production Crucible platform — including Core, Aether, and the full product stack — remains **private and under active development**. Nothing in this repository should be read as a launched product or a complete system. Capabilities described here are **directional**: prototype where noted, planned where noted, and conceptual for future ecosystem products.
+The production Crucible platform remains **private and under active development**. Diagrams below are **directional** — they communicate intent, not deployed systems. See [IP Boundary](docs/ip-boundary.md).
 
 ---
 
-## The Crucible Platform
+## The Problem
 
-**The Crucible is the platform — not a single app.** It is a long-term AI software ecosystem designed to help builders work with AI deliberately: owning their context locally, composing it across sessions, and calling external APIs only when necessary.
+Builders repeat the same expensive AI setup every session: re-explaining context, re-finding files, re-configuring agents, re-pasting prompts, and re-paying token and API costs. There is no map of what exists or how it connects.
 
-Three principles shape the platform:
+**The Crucible** exists to fix that — as a platform, not a chat window.
 
-| Principle | What it means |
-|-----------|---------------|
-| **Local-first intelligence** | Context, memories, and knowledge live close to the builder — not locked inside a chat window or a vendor's cloud |
-| **Composable context** | Prompts, files, memories, and skills assemble into reusable bundles — not one-off paste jobs |
-| **Disciplined API usage** | External model and tool calls are intentional, scoped, and traceable — reducing unnecessary token and API waste |
+---
 
-### Ecosystem Products
+## System Architecture
 
-| Product | Role | Status |
-|---------|------|--------|
-| **The Crucible** | Umbrella platform — the ecosystem, not one application | In development |
-| **Core** | Shared engine and runtime beneath all products | Private — not in this repo |
-| **Forge** | Desktop workspace for daily AI builder work | In development |
-| **Forge Brain** | Visual intelligence layer and graph surface inside Forge | **Prototype showcase** (this repo) |
-| **Aether** | Intelligence layer — context selection and knowledge surfacing | In development |
-| **Siege** | Integration platform — connecting external tools and systems | Planned |
-| **Barrage** | Future cloud and team platform | Planned |
-
-Forge Brain lives **inside Forge**. It does not replace Forge, Core, or Aether — it makes the relationships between AI assets visible and navigable.
-
-### Ecosystem Diagram
+The Crucible is an **AI Knowledge Operating System**: ecosystem products above a shared engine, with intelligence concepts and platform services at a high level.
 
 ```mermaid
 graph TB
-    subgraph crucible["The Crucible — Platform"]
-        subgraph forgeBox["Forge — Desktop Workspace"]
-            fb["Forge Brain<br/>Graph Surface"]
+    subgraph akos["The Crucible — AI Knowledge Operating System"]
+        direction TB
+
+        subgraph products["Ecosystem Products"]
+            direction LR
+            forge["Forge<br/><i>Desktop Workspace</i>"]
+            aether["Aether<br/><i>Intelligence Layer</i>"]
+            siege["Siege<br/><i>Integration Platform</i><br/>(planned)"]
+            barrage["Barrage<br/><i>Cloud / Team Platform</i><br/>(planned)"]
         end
-        core["Core<br/>Engine / Runtime"]
-        aether["Aether<br/>Intelligence Layer"]
-        siege["Siege — Integration<br/>(planned)"]
-        barrage["Barrage — Cloud / Team<br/>(planned)"]
+
+        subgraph forgeLayer["Forge — Visual Layer"]
+            fb["Forge Brain<br/><i>Graph Surface</i><br/>(showcase focus)"]
+        end
+
+        subgraph core["Core — Shared Engine / Runtime"]
+            direction TB
+
+            subgraph intelligence["Intelligence Architecture <i>(conceptual)</i>"]
+                direction LR
+                bb["Big Brain<br/><i>Central orchestration</i>"]
+                mb["Mini Brains<br/><i>Scoped specialists</i>"]
+                baby["Baby Brains<br/><i>Task-level units</i>"]
+                sl["Skills Library"]
+                ee["Experience Engine<br/><i>Learning loop</i>"]
+                bg["Brain Gardener<br/><i>Knowledge curation</i>"]
+            end
+
+            subgraph services["Platform Services <i>(abstract)</i>"]
+                direction LR
+                kg["Knowledge Graph"]
+                mem["Memory"]
+                pc["Prompt Compiler"]
+                to["Token Optimization"]
+                auto["Automation"]
+            end
+        end
     end
 
-    fb --> core
-    aether --> core
-    aether -.-> fb
+    forge --> fb
+    fb --> bb
+    bb --> mb
+    bb --> baby
+    mb --> sl
+    baby --> sl
+    bb --> kg
+    kg --> mem
+    bb --> pc
+    pc --> to
+    ee --> bb
+    bg --> kg
+    bg --> mem
+    aether --> bb
+    aether --> kg
+    auto --> bb
     siege -.-> core
     barrage -.-> core
+    forge --> core
 ```
 
-*Solid lines: in development. Dotted lines: planned. This diagram is conceptual — not a system deployment map.*
+*Conceptual diagram — not production topology. Full annotations: [docs/diagrams.md](docs/diagrams.md#1-system-architecture)*
+
+---
+
+## Knowledge Flow
+
+How context composes, reaches a model, and compounds back into the brain layer.
+
+```mermaid
+flowchart LR
+    user(["Builder"])
+    forge["Forge<br/><i>Desktop Workspace</i>"]
+    bb["Big Brain<br/><i>Orchestration</i>"]
+    kg["Knowledge Graph"]
+    skills["Skills Library /<br/>Mini Brains"]
+    model["Claude or<br/>Other AI Model"]
+    response["Better Response<br/><i>Scoped · Provenance-aware</i>"]
+    ee["Experience Engine"]
+    brain["Brain Layer<br/><i>Memory + Graph update</i>"]
+
+    user -->|"intent + focus"| forge
+    forge -->|"composed request"| bb
+    bb -->|"resolve context"| kg
+    kg -->|"relevant assets"| skills
+    skills -->|"scoped prompt + context"| model
+    model -->|"model output"| response
+    response -->|"outcome signal"| ee
+    ee -->|"learn + refine"| brain
+    brain -->|"enriched knowledge"| kg
+    brain -.->|"updated context"| bb
+    response -->|"deliver"| forge
+    forge -->|"present"| user
+```
+
+*Logical flow — not proprietary orchestration code. Details: [docs/diagrams.md](docs/diagrams.md#2-knowledge-flow)*
+
+---
+
+## Product Roadmap
+
+```mermaid
+flowchart LR
+    mvp["Forge MVP<br/><i>Desktop workspace ·<br/>Forge Brain graph</i>"]
+    local["Local AI<br/><i>Local-first intelligence ·<br/>on-device context</i>"]
+    team["Team Collaboration<br/><i>Barrage · shared graphs</i>"]
+    market["Marketplace<br/><i>Skills · templates ·<br/>shared knowledge</i>"]
+    ent["Enterprise /<br/>Ecosystem<br/><i>Siege integrations ·<br/>full AKOS scale</i>"]
+
+    mvp -->|"now → near-term"| local
+    local -->|"mid-term"| team
+    team -->|"long-term"| market
+    market -->|"horizon"| ent
+```
+
+**Current stage:** Forge MVP / early showcase. Full platform not launched. Details: [docs/roadmap.md](docs/roadmap.md) · [docs/diagrams.md](docs/diagrams.md#3-product-roadmap)
+
+---
+
+## Platform Principles
+
+| Principle | What it means |
+|-----------|---------------|
+| **Local-first intelligence** | Context and knowledge live close to the builder — owned, not trapped in a vendor cloud |
+| **Composable context** | Prompts, files, memories, and skills assemble into reusable bundles |
+| **Disciplined API usage** | Model calls are scoped, intentional, and traceable — less token and API waste |
+
+---
+
+## Ecosystem at a Glance
+
+| Product | Role | Status |
+|---------|------|--------|
+| **The Crucible** | AI Knowledge Operating System — the platform | In development |
+| **Core** | Shared engine and runtime | Private — not in this repo |
+| **Forge** | Desktop workspace | In development |
+| **Forge Brain** | Graph surface inside Forge — **this showcase** | Early public showcase |
+| **Aether** | Intelligence layer | In development |
+| **Siege** | Integration platform | Planned |
+| **Barrage** | Cloud / team platform | Planned |
 
 ---
 
 ## What Forge Brain Visualizes
 
-Forge Brain maps how the entities in a builder's practice connect:
-
-| Entity | What it represents |
-|--------|-------------------|
-| **Projects** | Scoped workspaces and goals |
-| **Prompts** | Reusable instruction templates and variants |
-| **Agents** | Configured AI workers with roles and capabilities |
-| **Files** | Documents, code, and reference material |
-| **Memories** | Persistent context that carries across sessions |
-| **Skills** | Packaged capabilities and domain expertise |
-| **Models** | LLM and tool endpoints available to the system |
-| **Workflows** | Multi-step processes linking agents, prompts, and outputs |
-| **Clients** | External parties, accounts, or engagement contexts |
-| **Knowledge** | Structured and unstructured information assets |
-
-Relationships are first-class — not buried in chat history or folder hierarchies. Forge Brain will make those relationships **visible**: which prompt an agent uses, which file a memory references, which client owns a project.
-
-### Knowledge Graph Concept
-
-The diagram below is a **conceptual example** — not a screenshot or live graph. It shows how Forge Brain will render entities and relationships on the canvas.
+Forge Brain maps relationships across a builder's practice — projects, prompts, files, agents, memories, skills, models, workflows, clients, and knowledge.
 
 ```mermaid
 graph TD
@@ -109,97 +195,32 @@ graph TD
     skill -->|supports| knowledge
 ```
 
-*Example subgraph for one project. A real builder graph may span many projects, clients, and workflows.*
+*Conceptual canvas view — not a screenshot. Interactive prototype planned.*
 
 ---
 
 ## Why Forge Brain Exists
 
-Modern AI work repeats the same expensive setup: re-explaining context, re-finding files, re-configuring agents, and re-pasting prompts. Forge Brain addresses that at the visual layer.
-
-- **Reduce repeated setup** — See what already exists before rebuilding from scratch
-- **Reuse composable context** — Memories, skills, and knowledge bundles travel with the work
-- **Reduce unnecessary token and API waste** — Understand what context is in play before sending it
-- **Preserve provenance and source references** — Trace where knowledge came from and what it connects to
-- **Make large knowledge feel small in active context** — Focus on the subgraph that matters right now
-- **Organize AI work visually** — See the whole practice, not just the latest chat thread
-
-Forge Brain is for builders who treat AI as infrastructure — not a disposable conversation.
+- **Reduce repeated setup** — See what exists before rebuilding context
+- **Reuse composable context** — Skills, memories, and bundles travel with the work
+- **Reduce token and API waste** — Scope what reaches the model
+- **Preserve provenance** — Trace sources and references across the graph
+- **Make large knowledge feel small** — Focus on the subgraph that matters now
+- **Organize AI work visually** — See the whole practice, not just the latest chat
 
 ---
 
 ## Target Prototype Capabilities
 
-Forge Brain's interactive demo is **not yet available** in this repository. The following are **planned interaction-layer capabilities** for the first public prototype — not shipped features.
+Interactive demo **not yet in this repo**. Planned Forge Brain interaction-layer features:
 
 | Capability | Description |
 |------------|-------------|
-| **Interactive graph canvas** | Explore AI assets as a connected network |
-| **Zooming & panning** | Navigate large knowledge graphs |
-| **Draggable nodes** | Rearrange and organize visually |
-| **Relationship edges** | See how entities connect across the graph |
-| **Minimap** | Orient within complex graphs at a glance |
-| **Focus mode** | Isolate a subgraph for deep work |
-| **Timeline mode** | View how assets and relationships evolved over time |
-| **Cluster mode** | Group related entities for high-level overview |
-| **Aether mode** | Preview how the intelligence layer surfaces relevant context in place |
-
-Backend orchestration, memory systems, retrieval logic, and production integrations are **not included** in this repository. See [Architecture](docs/architecture.md) and [IP Boundary](docs/ip-boundary.md).
-
----
-
-## Architecture (High Level)
-
-Forge Brain is the graph surface inside Forge. Forge sits on Core. Ecosystem products extend the platform at different layers:
-
-```
-┌─────────────────────────────────────────────────────────┐
-│              The Crucible (Platform)                    │
-├─────────────────────────────────────────────────────────┤
-│  Forge (Desktop Workspace)                              │
-│  ┌───────────────────────────────────────────────────┐  │
-│  │  Forge Brain — graph surface · modes · navigation │  │
-│  └───────────────────────────────────────────────────┘  │
-├─────────────────────────────────────────────────────────┤
-│  Core — shared engine / runtime                         │
-├──────────────┬──────────────┬───────────────────────────┤
-│   Aether     │    Siege     │        Barrage            │
-│ Intelligence │ Integration  │   Cloud / Team (future)   │
-│    layer     │   platform   │        platform           │
-└──────────────┴──────────────┴───────────────────────────┘
-```
-
-In the production platform, Forge Brain reads entity and relationship data through Forge and Core, renders it as an interactive graph, and coordinates with Aether for context surfacing. Siege and Barrage extend the ecosystem for integrations and team-scale work — both are planned, not shipped.
-
-For more detail, see [docs/architecture.md](docs/architecture.md).
-
----
-
-## Upcoming Visual Assets
-
-**No screenshots, GIFs, or demo recordings exist yet.** Visual media will be added when the interactive prototype is ready to show. The table below lists **planned placeholder paths only** — these files are not in the repository today.
-
-| Planned path *(not yet created)* | Intended content |
-|----------------------------------|------------------|
-| `assets/forge-brain-hero.png` | Full canvas overview with nodes and edges |
-| `assets/forge-brain-focus.gif` | Focus mode isolating a project subgraph |
-| `assets/forge-brain-timeline.gif` | Timeline mode showing relationship evolution |
-| `assets/forge-brain-aether.gif` | Aether mode context overlay preview |
-| `assets/forge-brain-cluster.png` | Cluster mode grouped entity view |
-
-Until then, the mermaid diagrams in this README convey the product concept in text form.
-
----
-
-## Roadmap
-
-| Phase | Focus |
-|-------|-------|
-| **Alpha** *(current)* | Documentation, product positioning, conceptual diagrams — prototype in development |
-| **Beta** | Demo wired to representative data; richer entity detail views |
-| **Future** | Live Core integration, Siege connectors, Barrage team features |
-
-Full roadmap: [docs/roadmap.md](docs/roadmap.md)
+| Interactive graph canvas | Explore assets as a connected network |
+| Zoom, pan, drag, minimap | Navigate large graphs |
+| Relationship edges | See how entities connect |
+| Focus · Timeline · Cluster modes | Multiple views of the same graph |
+| Aether mode | Preview intelligence-layer context surfacing |
 
 ---
 
@@ -207,17 +228,13 @@ Full roadmap: [docs/roadmap.md](docs/roadmap.md)
 
 | Area | Status |
 |------|--------|
-| Forge Brain graph prototype | **In development** — not yet in this repo |
-| Visual assets (screenshots, GIFs) | **Not yet created** |
-| Forge desktop workspace | **In development** — private repo |
-| Core engine / runtime | **In development** — private repo; not represented here |
-| Aether intelligence layer | **In development** — Aether mode is a UI preview only |
-| Siege integration platform | **Planned** |
-| Barrage cloud / team platform | **Planned** |
-| Full platform launch | **Not yet** — ecosystem is under active development |
+| Architecture diagrams (Mermaid) | **Available** — conceptual only |
+| Forge Brain interactive prototype | **Planned** — not in this repo |
+| Screenshots / GIFs | **Not created** |
+| Core engine / Forge desktop | **In development** — private repo |
+| Full platform launch | **Not yet** |
 
-**Maintainer:** Austin Brower  
-**Program context:** Public showcase for builder program review
+**Maintainer:** Austin Brower
 
 ---
 
@@ -225,24 +242,24 @@ Full roadmap: [docs/roadmap.md](docs/roadmap.md)
 
 | Document | Description |
 |----------|-------------|
-| [Vision](docs/vision.md) | The Crucible platform thesis and design principles |
-| [Architecture](docs/architecture.md) | High-level system design (no proprietary internals) |
+| [Diagrams](docs/diagrams.md) | **Canonical source** for all Mermaid architecture visuals |
+| [Vision](docs/vision.md) | AKOS thesis and design principles |
+| [Architecture](docs/architecture.md) | High-level system design |
 | [Roadmap](docs/roadmap.md) | Alpha, Beta, and Future phases |
-| [IP Boundary](docs/ip-boundary.md) | What this repo includes and what stays private |
+| [IP Boundary](docs/ip-boundary.md) | Public vs. private delineation |
 
 ---
 
 ## Getting Started
 
-This repository is **documentation-only** today. There is nothing to run or install yet.
+Documentation-only today — nothing to run or install.
 
 ```bash
 git clone https://github.com/BattleBoundBrandingGit/crucible-forge-demo.git
 cd crucible-forge-demo
-# Read docs/ — interactive prototype instructions will follow a future release
 ```
 
-Clone the repo to read the vision, architecture, and roadmap. Watch for release tags when the first interactive prototype ships.
+Start with [docs/diagrams.md](docs/diagrams.md), then read [docs/vision.md](docs/vision.md).
 
 ---
 
