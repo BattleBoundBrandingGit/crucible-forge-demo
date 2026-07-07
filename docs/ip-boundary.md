@@ -6,7 +6,7 @@ This document defines what **this public showcase repository** includes and what
 
 ## Accuracy Note
 
-**This repository is a showcase and documentation/demo surface for Forge Brain.** The production Crucible platform — including Core (the shared engine/runtime), Forge (the desktop workspace), and Aether (the intelligence layer) — remains private and under active development. Nothing here should be interpreted as a launched product or a complete system.
+**This repository is an early public showcase and documentation surface for Forge Brain.** The production Crucible platform — including Core (the shared engine/runtime), Forge (the desktop workspace), and Aether (the intelligence layer) — remains private and under active development. Nothing here should be interpreted as a launched product, interactive demo, or complete system.
 
 ---
 
@@ -18,10 +18,11 @@ This document defines what **this public showcase repository** includes and what
 |----------|-----------------|
 | **Product vision** | The Crucible as a platform — local-first intelligence, composable context, disciplined API usage |
 | **Ecosystem overview** | High-level roles of The Crucible, Core, Forge, Forge Brain, Aether, Siege, and Barrage |
-| **Forge Brain prototype** | In-development interactive graph demo with navigation modes |
+| **Forge Brain prototype** | Planned interactive graph demo — not yet in this repository |
 | **High-level architecture** | Layered system diagram, entity-relationship model (abstract), data flow (simplified) |
+| **Conceptual diagrams** | Mermaid ecosystem and knowledge graph illustrations in README |
 | **Roadmap** | Alpha, Beta, and Future phases with honest development status |
-| **Demo assets** | Screenshots, GIFs, and sample graph data (as they are created) |
+| **Visual assets** | Planned screenshots and GIFs — **not created yet**; placeholder paths documented only |
 | **Documentation** | README, vision, architecture, roadmap, and this IP boundary document |
 
 ### Acceptable Level of Detail
@@ -74,7 +75,7 @@ This document defines what **this public showcase repository** includes and what
 | **The Crucible** (platform) | Vision & positioning only | Principles, ecosystem map, long-term direction |
 | **Core** (engine/runtime) | Architecture diagram only | Abstract role — no implementation |
 | **Forge** (desktop workspace) | Referenced, not included | Described as the host for Forge Brain |
-| **Forge Brain** (graph surface) | **Yes — prototype demo** | Interactive graph, navigation modes, documentation |
+| **Forge Brain** (graph surface) | **Documentation + diagrams only** | Conceptual mermaid diagrams; prototype and visual assets planned |
 | **Aether** (intelligence layer) | Aether mode UI preview only | Conceptual overlay — no intelligence internals |
 | **Siege** (integration platform) | Roadmap reference only | Planned — no code or specs |
 | **Barrage** (cloud/team platform) | Roadmap reference only | Planned — no code or specs |
@@ -86,7 +87,7 @@ This document defines what **this public showcase repository** includes and what
 1. **Protect the engine** — Core, Aether, and orchestration layers are core IP
 2. **Protect clients** — No real client data, configurations, or identifiable information
 3. **Enable open showcase** — Evaluators can understand the product without production access
-4. **Set honest expectations** — This is a demo surface, not the platform
+4. **Set honest expectations** — This is an early documentation showcase, not a shipped product or demo
 
 ---
 
@@ -96,12 +97,12 @@ This document defines what **this public showcase repository** includes and what
 |--------------------------|------------------------|
 | Platform vision and design principles | Core engine performance and behavior |
 | Ecosystem product boundaries | Memory system and persistence |
-| Forge Brain UX and interaction design | Aether intelligence layer accuracy |
-| Graph navigation mode concepts | Token optimization results |
+| Forge Brain UX concepts (diagrams, docs) | Working interactive prototype |
+| Graph navigation mode concepts | Aether intelligence layer accuracy |
 | Entity-relationship modeling approach | Real client deployments |
 | Documentation quality and honesty | Full API specifications |
-| Prototype interactivity | Forge desktop application |
-| Development status transparency | Infrastructure and scaling |
+| Conceptual mermaid diagrams | Screenshots, GIFs, and demo recordings |
+| Development status transparency | Forge desktop application and infrastructure |
 
 ---
 
@@ -110,7 +111,7 @@ This document defines what **this public showcase repository** includes and what
 - **This repository** — Public showcase materials for evaluation, demonstration, and program application
 - **Private production systems** — All rights reserved; not licensed through this repository
 - **Demo code** — When released, prototype application code will carry an explicit open-source license
-- **Assets** — Screenshots and GIFs are provided for showcase use
+- **Visual assets** — Screenshots and GIFs will be added when the prototype is ready; none exist in the repo today
 
 ---
 

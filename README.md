@@ -4,7 +4,7 @@
 
 Forge Brain is the **early visual layer** inside [Forge](docs/vision.md) — the desktop workspace for The Crucible, a long-term AI software ecosystem built around **local-first intelligence**, **composable context**, and **disciplined API usage**.
 
-This public repository is a **showcase and documentation/demo surface** for Forge Brain. It demonstrates how builders can visualize relationships across projects, prompts, files, agents, memories, skills, models, workflows, clients, and knowledge — without exposing the proprietary engine that powers the production platform.
+This repository is an **early public showcase** — documentation and product positioning for a product under active development. It explains how Forge Brain will help builders visualize relationships across projects, prompts, files, agents, memories, skills, models, workflows, clients, and knowledge. There is **no interactive demo or visual media in this repo yet**; diagrams below convey the concept until assets and a prototype are ready.
 
 ---
 
@@ -12,8 +12,8 @@ This public repository is a **showcase and documentation/demo surface** for Forg
 
 | | |
 |---|---|
-| **What this repo is** | A public showcase — documentation, product positioning, and an in-development interactive demo of Forge Brain's graph surface |
-| **What this repo is not** | The production Crucible platform, Core engine, or any proprietary backend |
+| **What this repo is** | An early public showcase — documentation, diagrams, and product positioning for Forge Brain |
+| **What this repo is not** | A shipped product, production platform, interactive demo, or proprietary engine |
 
 The production Crucible platform — including Core, Aether, and the full product stack — remains **private and under active development**. Nothing in this repository should be read as a launched product or a complete system. Capabilities described here are **directional**: prototype where noted, planned where noted, and conceptual for future ecosystem products.
 
@@ -45,6 +45,29 @@ Three principles shape the platform:
 
 Forge Brain lives **inside Forge**. It does not replace Forge, Core, or Aether — it makes the relationships between AI assets visible and navigable.
 
+### Ecosystem Diagram
+
+```mermaid
+graph TB
+    subgraph crucible["The Crucible — Platform"]
+        subgraph forgeBox["Forge — Desktop Workspace"]
+            fb["Forge Brain<br/>Graph Surface"]
+        end
+        core["Core<br/>Engine / Runtime"]
+        aether["Aether<br/>Intelligence Layer"]
+        siege["Siege — Integration<br/>(planned)"]
+        barrage["Barrage — Cloud / Team<br/>(planned)"]
+    end
+
+    fb --> core
+    aether --> core
+    aether -.-> fb
+    siege -.-> core
+    barrage -.-> core
+```
+
+*Solid lines: in development. Dotted lines: planned. This diagram is conceptual — not a system deployment map.*
+
 ---
 
 ## What Forge Brain Visualizes
@@ -64,7 +87,29 @@ Forge Brain maps how the entities in a builder's practice connect:
 | **Clients** | External parties, accounts, or engagement contexts |
 | **Knowledge** | Structured and unstructured information assets |
 
-Relationships are first-class — not buried in chat history or folder hierarchies. Forge Brain makes those relationships **visible**: which prompt an agent uses, which file a memory references, which client owns a project.
+Relationships are first-class — not buried in chat history or folder hierarchies. Forge Brain will make those relationships **visible**: which prompt an agent uses, which file a memory references, which client owns a project.
+
+### Knowledge Graph Concept
+
+The diagram below is a **conceptual example** — not a screenshot or live graph. It shows how Forge Brain will render entities and relationships on the canvas.
+
+```mermaid
+graph TD
+    client["Client"] -->|owns| project["Project"]
+    project -->|contains| prompt["Prompt"]
+    project -->|contains| agent["Agent"]
+    project -->|contains| memory["Memory"]
+    agent -->|uses| prompt
+    agent -->|powered_by| model["Model"]
+    agent -->|equipped_with| skill["Skill"]
+    agent -->|references| file["File"]
+    workflow["Workflow"] -->|chains| agent
+    memory -->|draws_from| knowledge["Knowledge"]
+    file -->|sources| knowledge
+    skill -->|supports| knowledge
+```
+
+*Example subgraph for one project. A real builder graph may span many projects, clients, and workflows.*
 
 ---
 
@@ -83,9 +128,9 @@ Forge Brain is for builders who treat AI as infrastructure — not a disposable 
 
 ---
 
-## Prototype Capabilities (Demo Surface)
+## Target Prototype Capabilities
 
-This showcase demonstrates Forge Brain's graph experience at the **interaction layer only**. These are prototype capabilities — not production integrations.
+Forge Brain's interactive demo is **not yet available** in this repository. The following are **planned interaction-layer capabilities** for the first public prototype — not shipped features.
 
 | Capability | Description |
 |------------|-------------|
@@ -130,17 +175,19 @@ For more detail, see [docs/architecture.md](docs/architecture.md).
 
 ---
 
-## Screenshots & Demo Assets
+## Upcoming Visual Assets
 
-> Placeholder section — assets will be added as the demo matures.
+**No screenshots, GIFs, or demo recordings exist yet.** Visual media will be added when the interactive prototype is ready to show. The table below lists **planned placeholder paths only** — these files are not in the repository today.
 
-| Asset | Description |
-|-------|-------------|
+| Planned path *(not yet created)* | Intended content |
+|----------------------------------|------------------|
 | `assets/forge-brain-hero.png` | Full canvas overview with nodes and edges |
 | `assets/forge-brain-focus.gif` | Focus mode isolating a project subgraph |
 | `assets/forge-brain-timeline.gif` | Timeline mode showing relationship evolution |
 | `assets/forge-brain-aether.gif` | Aether mode context overlay preview |
 | `assets/forge-brain-cluster.png` | Cluster mode grouped entity view |
+
+Until then, the mermaid diagrams in this README convey the product concept in text form.
 
 ---
 
@@ -148,7 +195,7 @@ For more detail, see [docs/architecture.md](docs/architecture.md).
 
 | Phase | Focus |
 |-------|-------|
-| **Alpha** *(current)* | Documentation, product positioning, interactive graph prototype |
+| **Alpha** *(current)* | Documentation, product positioning, conceptual diagrams — prototype in development |
 | **Beta** | Demo wired to representative data; richer entity detail views |
 | **Future** | Live Core integration, Siege connectors, Barrage team features |
 
@@ -160,7 +207,8 @@ Full roadmap: [docs/roadmap.md](docs/roadmap.md)
 
 | Area | Status |
 |------|--------|
-| Forge Brain graph prototype | **In development** — interaction-layer demo |
+| Forge Brain graph prototype | **In development** — not yet in this repo |
+| Visual assets (screenshots, GIFs) | **Not yet created** |
 | Forge desktop workspace | **In development** — private repo |
 | Core engine / runtime | **In development** — private repo; not represented here |
 | Aether intelligence layer | **In development** — Aether mode is a UI preview only |
@@ -186,13 +234,15 @@ Full roadmap: [docs/roadmap.md](docs/roadmap.md)
 
 ## Getting Started
 
-This repository is **documentation-first** while the interactive demo surface is being prepared.
+This repository is **documentation-only** today. There is nothing to run or install yet.
 
 ```bash
-git clone https://github.com/<org>/crucible-forge-demo.git
+git clone https://github.com/BattleBoundBrandingGit/crucible-forge-demo.git
 cd crucible-forge-demo
-# Demo app instructions will be added with the first public prototype release
+# Read docs/ — interactive prototype instructions will follow a future release
 ```
+
+Clone the repo to read the vision, architecture, and roadmap. Watch for release tags when the first interactive prototype ships.
 
 ---
 

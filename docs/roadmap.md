@@ -6,7 +6,7 @@ This roadmap describes the public development trajectory for Forge Brain and its
 
 ## Alpha — Current Phase
 
-**Goal:** Establish this repository as a credible public showcase — clear product positioning, ecosystem boundaries, and an interactive graph prototype.
+**Goal:** Establish this repository as a credible early public showcase — clear product positioning, ecosystem boundaries, and conceptual diagrams. Interactive prototype work happens separately.
 
 ### Deliverables
 
@@ -14,21 +14,21 @@ This roadmap describes the public development trajectory for Forge Brain and its
 |------|--------|-------|
 | Public showcase documentation | **Done** | Vision, architecture, roadmap, IP boundary |
 | Product positioning & accuracy note | **Done** | Platform boundaries, no overclaiming |
-| Interactive graph canvas | **In development** | Prototype — nodes, edges, zoom, pan, drag |
-| Navigation modes | **In development** | Focus, timeline, cluster, Aether preview |
-| Minimap & viewport controls | **In development** | Orientation within large graphs |
-| Demo asset placeholders | **In progress** | Screenshots and GIFs for README |
+| Conceptual diagrams (mermaid) | **Done** | Ecosystem and knowledge graph in README |
+| Interactive graph canvas | **Planned** | First prototype not yet in this repo |
+| Navigation modes | **Planned** | Focus, timeline, cluster, Aether preview |
+| Minimap & viewport controls | **Planned** | Part of first prototype |
+| Visual assets (screenshots, GIFs) | **Planned** | Not created yet — paths documented as placeholders |
 | Sample graph dataset | **Planned** | Representative nodes across entity types |
-| Local demo instructions | **Planned** | Clone-and-run for evaluators |
+| Local demo instructions | **Planned** | Clone-and-run when prototype ships |
 
 ### Alpha Success Criteria
 
 - A reviewer can understand The Crucible ecosystem and Forge Brain's role within 60 seconds
 - Product boundaries are clear: platform vs. products, public vs. private
-- Graph interactions in the prototype feel responsive and intentional
-- Navigation modes demonstrate distinct conceptual value
-- Documentation does not overclaim production readiness
-- Repository is suitable as a public showcase for builder programs
+- Conceptual diagrams communicate the graph and ecosystem vision without implying shipped UI
+- Documentation does not overclaim production readiness or existing visual assets
+- Repository is suitable as an early public showcase for builder programs
 
 ---
 

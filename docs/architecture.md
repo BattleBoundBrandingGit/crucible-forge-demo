@@ -51,7 +51,7 @@ Forge Brain lives **inside** Forge as its visual intelligence layer.
 
 ### Forge Brain (Graph Surface) — *this showcase*
 
-The visual intelligence layer and interactive graph surface within Forge. In this public repository, Forge Brain is represented as a **prototype demo** of the interaction layer.
+The visual intelligence layer and interactive graph surface within Forge. In this public repository, Forge Brain is represented through **documentation and conceptual diagrams only** — the interactive prototype is planned but not yet published here.
 
 Responsibilities (conceptual):
 
@@ -161,6 +161,6 @@ See [IP Boundary](ip-boundary.md) for the complete public/private delineation.
 
 ## Technology Notes (This Showcase)
 
-This public repository contains the **Forge Brain demo surface only** — documentation and an in-development interactive prototype. When the demo is released, it will use technologies appropriate for graph visualization. Specific framework choices will be documented at release time.
+This public repository contains **documentation and conceptual diagrams only** for the Forge Brain demo surface. When the interactive prototype is released, it will use technologies appropriate for graph visualization. Specific framework choices will be documented at release time.
 
 The production Crucible platform — including Core, Forge, and Aether — is developed in a separate, private repository.
