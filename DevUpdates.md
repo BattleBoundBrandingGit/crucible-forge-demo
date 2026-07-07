@@ -201,3 +201,43 @@ Development log for the crucible-forge-demo public showcase repository.
 **Recommended next step:**
 
 - Capture screenshots in each display mode for Claude Max for Builders application; commit and push
+
+---
+
+## 2026-07-07 · 6:48 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Upgrade Forge Brain demo to ultra-dense living knowledge graph — Canvas rendering, 300–1500 nodes, traveling edge pulses, cluster modes.
+
+**Files/folders created or changed:**
+
+- `demo/index.html` (rewritten)
+- `demo/styles.css` (rewritten)
+- `demo/script.js` (rewritten — Canvas graph engine)
+- `README.md` (updated — Interactive Concept Demo section)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Procedural mock graph: 15 domain clusters + hub + ecosystem anchors (Forge, Core, Aether, Claude)
+- Density controls: Low (~300), Medium (~700), High (~1400) nodes with 1000+ edges at medium/high
+- Canvas renderer with glowing edges, anchor nodes, cluster halos (Cluster View)
+- Click anchor → wave pulses travel along edges via requestAnimationFrame; nodes flash on arrival
+- Modes: Brain Map, Knowledge Flow, Cluster View, Signal View (continuous faint pulses)
+- Pan/zoom, pulse speed slider, reset view, sidebar with pills and boundary note
+- Static only — mock conceptual data, no backend
+
+**Verification status:**
+
+- Manual: open `demo/index.html`, test Medium density and anchor click wave
+- No automated tests
+
+**Assumptions made:**
+
+- Satellite nodes use generic conceptual labels (not real client data)
+- Performance capped at dpr 2 and ~1400 nodes for browser safety
+
+**Recommended next step:**
+
+- Screenshot Signal View with wave on Big Brain anchor for application; commit and push

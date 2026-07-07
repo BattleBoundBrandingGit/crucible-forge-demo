@@ -21,24 +21,21 @@ The production Crucible platform remains **private and under active development*
 
 ## Interactive Concept Demo
 
-A **premium static HTML brain map** — cinematic, screenshot-ready, and open locally with no install.
+A **living knowledge graph** — hundreds of interconnected mock nodes rendered on Canvas with traveling signal pulses.
 
 **[Open `demo/index.html`](demo/index.html)**
 
 | Feature | Description |
 |---------|-------------|
-| **Radial brain map** | Large central Crucible Brain with first and second orbit modules |
-| **Curved neural edges** | Glowing SVG relationship lines that highlight on selection |
-| **Display modes** | Ecosystem View · Brain View · Knowledge Flow (visual-only toggles) |
-| **Sidebar brief** | Category badges, explanations, clickable connection pills |
-| **Atmosphere** | Particle field, pulse rings, dark cinematic gradients |
+| **Dense brain map** | 300–1,400 nodes · 1,000+ edges (density control) |
+| **15 domain clusters** | Projects, Prompts, Memories, Skills, Agents, Files, Models, Workflows, Clients, Knowledge, Big/Mini/Baby Brains, Experience Engine, Brain Gardener |
+| **Signal waves** | Click an anchor — electric pulses travel along edges |
+| **Display modes** | Brain Map · Knowledge Flow · Cluster View · Signal View |
+| **Navigation** | Pan (drag) · Zoom (scroll) · Reset view |
 
-**First orbit:** Big Brain · Knowledge Graph · Experience Engine · Aether · Forge  
-**Second orbit:** Mini Brains · Baby Brains · Skills · Memory · Prompt Compiler · Token Optimization · Brain Gardener · Core · Siege · Barrage
+Mock conceptual data only — **no backend, no production graph, not proprietary.**
 
-Mock conceptual data only — **no backend, no proprietary orchestration, not production.**
-
-*The full Forge Brain entity graph canvas (zoom, pan, project nodes) remains in development.*
+*Entity-level Forge Brain canvas (zoom, pan, project nodes) remains in development.*
 
 ---
 

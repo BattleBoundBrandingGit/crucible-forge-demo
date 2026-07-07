@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Forge Brain — premium public concept demo for The Crucible AI Knowledge Operating System."
+      content="Forge Brain — living knowledge graph concept demo for The Crucible AKOS."
     />
-    <title>Forge Brain — Visual Intelligence Layer</title>
+    <title>Forge Brain — Living Knowledge Graph</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,96 +17,76 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div class="bg-vignette" aria-hidden="true"></div>
-    <div class="bg-neural" aria-hidden="true"></div>
-
     <div class="app">
       <header class="hero">
-        <div class="hero-top">
-          <div class="hero-brand">
-            <span class="hero-eyebrow">The Crucible · AKOS</span>
+        <div class="hero-row">
+          <div>
+            <p class="eyebrow">The Crucible · AKOS</p>
             <h1>Forge Brain</h1>
-            <p class="hero-tagline">Visual Intelligence Layer</p>
+            <p class="tagline">Living Knowledge Graph · Concept Demo</p>
           </div>
-          <div class="hero-meta">
-            <a class="hero-link" href="../docs/visuals/claude-application/README.md">Application visuals</a>
-            <span class="hero-badge">Concept Demo</span>
+          <div class="hero-badges">
+            <a class="link-btn" href="../docs/visuals/claude-application/README.md">Visuals</a>
+            <span class="badge">Mock Data Only</span>
           </div>
         </div>
-        <div class="notice-bar" role="note">
-          <span class="notice-dot" aria-hidden="true"></span>
-          Static public concept demo — no backend, no proprietary orchestration logic.
-        </div>
+        <p class="notice">
+          <span class="notice-pulse"></span>
+          Public concept demo — no backend, no production graph data, no proprietary orchestration.
+        </p>
       </header>
 
-      <div class="mode-bar" role="toolbar" aria-label="Display mode">
-        <span class="mode-label">View</span>
-        <div class="mode-toggles" id="mode-toggles"></div>
+      <div class="controls" role="toolbar" aria-label="Graph controls">
+        <div class="control-group">
+          <span class="control-label">Mode</span>
+          <div class="btn-row" id="mode-btns"></div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Density</span>
+          <div class="btn-row" id="density-btns"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="pulse-speed">Pulse speed</label>
+          <input id="pulse-speed" type="range" min="0.4" max="2.5" step="0.1" value="1" />
+        </div>
+        <button type="button" class="reset-btn" id="reset-btn">Reset view</button>
       </div>
 
       <main class="stage">
-        <section class="graph-stage" id="graph-stage" aria-label="Crucible Brain radial map">
-          <svg id="graph-svg" aria-hidden="true">
-            <defs>
-              <filter id="edge-glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <radialGradient id="hub-glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="rgba(34,211,238,0.35)" />
-                <stop offset="100%" stop-color="rgba(34,211,238,0)" />
-              </radialGradient>
-            </defs>
-            <g id="pulse-rings"></g>
-            <g id="spoke-layer"></g>
-            <g id="edge-layer"></g>
-          </svg>
-          <div id="nodes-layer"></div>
-
-          <aside class="legend-card" aria-label="Legend">
-            <h3>Map Legend</h3>
-            <ul class="legend-list">
-              <li><span class="dot inner"></span> First orbit — core systems</li>
-              <li><span class="dot outer"></span> Second orbit — platform layer</li>
-              <li><span class="dot planned"></span> Planned product</li>
-            </ul>
-            <p class="legend-tip">Click a node · Press Esc to clear</p>
-          </aside>
+        <section class="canvas-wrap" id="canvas-wrap">
+          <canvas id="graph-canvas" aria-label="Living knowledge graph"></canvas>
+          <div class="hub-label" id="hub-label">The Crucible Brain</div>
+          <div class="stats" id="stats" aria-live="polite"></div>
         </section>
 
-        <aside class="sidebar" aria-label="Node details">
+        <aside class="sidebar">
           <div class="sidebar-head">
-            <span class="sidebar-label">Intelligence Brief</span>
-            <h2 id="sidebar-heading">Select a node</h2>
+            <span class="sidebar-eyebrow">Intelligence Brief</span>
+            <h2 id="panel-title">Explore the graph</h2>
           </div>
           <div class="sidebar-body">
-            <div class="sidebar-empty" id="panel-empty">
-              <div class="empty-icon" aria-hidden="true">◎</div>
+            <div class="panel-empty" id="panel-empty">
               <p>
-                Explore the radial brain map. Each node is a <strong>public-safe concept</strong> —
-                not production code.
+                Click an <strong>anchor node</strong> (larger glow) to send a signal wave through its
+                local network. Hover any node for a tooltip.
               </p>
+              <p class="hint">Esc clears selection · Drag to pan · Scroll to zoom</p>
             </div>
-            <div class="sidebar-content" id="panel-content">
+            <div class="panel-content" id="panel-content">
               <div class="badge-row">
                 <span class="cat-badge" id="panel-category"></span>
-                <span class="orbit-badge" id="panel-orbit"></span>
+                <span class="orbit-badge" id="panel-cluster"></span>
               </div>
-              <h3 class="node-title" id="panel-title"></h3>
+              <h3 class="node-title" id="panel-node-title"></h3>
               <p class="node-desc" id="panel-desc"></p>
               <div class="conn-section">
                 <h4>Connected concepts</h4>
                 <div class="pill-row" id="rel-list"></div>
               </div>
-              <div class="boundary-note">
-                <strong>Public showcase boundary.</strong> Proprietary retrieval, prompt compiler
-                internals, embeddings, ranking, and production memory logic are not represented
-                here.
-              </div>
+              <p class="boundary">
+                <strong>Public showcase.</strong> No retrieval, embeddings, ranking, prompt compiler
+                internals, or production memory logic.
+              </p>
             </div>
           </div>
         </aside>

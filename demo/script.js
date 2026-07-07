@@ -1,644 +1,784 @@
 /**
- * Forge Brain — Premium Public Concept Demo
- * Mock data only. No backend. No proprietary logic.
+ * Forge Brain — Living Knowledge Graph (Public Concept Demo)
+ * Canvas-rendered mock graph. No backend. No proprietary logic.
  */
 
+const DENSITY = { low: 300, medium: 700, high: 1400 };
+
 const MODES = [
-  {
-    id: "ecosystem",
-    label: "Ecosystem View",
-    highlight: new Set([
-      "crucible",
-      "forge",
-      "core",
-      "aether",
-      "siege",
-      "barrage",
-      "big-brain",
-    ]),
-    description: "Ecosystem products and platform boundary",
-  },
-  {
-    id: "brain",
-    label: "Brain View",
-    highlight: new Set([
-      "crucible",
-      "big-brain",
-      "mini-brains",
-      "baby-brains",
-      "skills",
-      "experience-engine",
-      "brain-gardener",
-    ]),
-    description: "Intelligence architecture layer",
-  },
-  {
-    id: "knowledge",
-    label: "Knowledge Flow",
-    highlight: new Set([
-      "crucible",
-      "knowledge-graph",
-      "memory",
-      "prompt-compiler",
-      "token-optimization",
-      "experience-engine",
-      "big-brain",
-      "forge",
-      "brain-gardener",
-    ]),
-    description: "How knowledge composes and compounds",
-  },
+  { id: "brain", label: "Brain Map" },
+  { id: "flow", label: "Knowledge Flow" },
+  { id: "cluster", label: "Cluster View" },
+  { id: "signal", label: "Signal View" },
 ];
 
-const ORBIT_INNER = ["big-brain", "knowledge-graph", "experience-engine", "aether", "forge"];
-const ORBIT_OUTER = [
-  "mini-brains",
-  "baby-brains",
-  "skills",
-  "memory",
-  "prompt-compiler",
-  "token-optimization",
-  "brain-gardener",
-  "core",
-  "siege",
-  "barrage",
-];
+const FLOW_HIGHLIGHT = new Set([
+  "hub",
+  "user",
+  "forge",
+  "big-brain",
+  "knowledge",
+  "claude",
+  "experience-engine",
+]);
 
-const NODES = [
+const CLUSTER_DEFS = [
   {
-    id: "crucible",
-    label: "The Crucible Brain",
-    initials: "CB",
-    orbit: "center",
-    category: "hub",
-    short: "Central AKOS intelligence — the platform brain concept.",
-    description:
-      "The conceptual heart of The Crucible AI Knowledge Operating System. Unifies local-first intelligence, composable context, and disciplined API usage into one navigable brain map.",
-    connections: ["big-brain", "knowledge-graph", "experience-engine", "aether", "forge", "core"],
+    id: "projects",
+    label: "Projects",
+    color: "#22d3ee",
+    desc: "Scoped workspaces and goals across a builder's practice.",
   },
   {
-    id: "big-brain",
-    label: "Big Brain",
-    initials: "BB",
-    orbit: "inner",
-    category: "intelligence",
-    short: "Central orchestration — routes context and coordinates specialists.",
-    description:
-      "High-level orchestration within Core. Coordinates context between the Knowledge Graph, specialist units, and scoped model calls. Public-safe abstraction only.",
-    connections: ["crucible", "mini-brains", "baby-brains", "knowledge-graph", "prompt-compiler", "experience-engine", "aether"],
+    id: "prompts",
+    label: "Prompts",
+    color: "#38bdf8",
+    desc: "Reusable instruction templates and variants.",
   },
   {
-    id: "knowledge-graph",
-    label: "Knowledge Graph",
-    initials: "KG",
-    orbit: "inner",
-    category: "services",
-    short: "Entity-relationship store for all platform assets.",
-    description:
-      "Structured map of projects, prompts, agents, files, memories, skills, and their relationships. Forge Brain visualizes this at the entity level in the full product vision.",
-    connections: ["crucible", "big-brain", "memory", "brain-gardener", "experience-engine", "forge", "core"],
-  },
-  {
-    id: "experience-engine",
-    label: "Experience Engine",
-    initials: "EE",
-    orbit: "inner",
-    category: "intelligence",
-    short: "Learning loop — outcomes refine future context.",
-    description:
-      "Captures what worked and what context was in play. Feeds signals back so each session starts smarter. Learning internals are not exposed in this demo.",
-    connections: ["crucible", "big-brain", "memory", "knowledge-graph", "brain-gardener"],
-  },
-  {
-    id: "aether",
-    label: "Aether",
-    initials: "AE",
-    orbit: "inner",
-    category: "products",
-    short: "Intelligence layer — context selection and surfacing.",
-    description:
-      "Makes large knowledge feel small in active work. Surfaces relevant context without breaking flow. Internals remain proprietary.",
-    connections: ["crucible", "forge", "core", "memory", "token-optimization", "big-brain"],
-  },
-  {
-    id: "forge",
-    label: "Forge",
-    initials: "FG",
-    orbit: "inner",
-    category: "workspace",
-    short: "Desktop workspace — where builders work daily.",
-    description:
-      "Primary builder-facing product. Forge Brain is the graph surface inside Forge — this demo shows the higher-level brain map concept.",
-    connections: ["crucible", "core", "aether", "knowledge-graph", "skills"],
-  },
-  {
-    id: "mini-brains",
-    label: "Mini Brains",
-    initials: "MB",
-    orbit: "outer",
-    category: "intelligence",
-    short: "Scoped specialists for projects and domains.",
-    description:
-      "Mid-tier intelligence units scoped to a project, client, or workflow. Assemble focused context from Skills and the Knowledge Graph.",
-    connections: ["big-brain", "baby-brains", "skills", "knowledge-graph"],
-  },
-  {
-    id: "baby-brains",
-    label: "Baby Brains",
-    initials: "BY",
-    orbit: "outer",
-    category: "intelligence",
-    short: "Task-level units for narrow execution.",
-    description:
-      "Lightweight task-scoped units — a prompt run, summary, or workflow step. Keeps API calls intentional and narrow.",
-    connections: ["big-brain", "mini-brains", "skills", "token-optimization"],
+    id: "memories",
+    label: "Memories",
+    color: "#a78bfa",
+    desc: "Persistent context that carries across sessions.",
   },
   {
     id: "skills",
     label: "Skills",
-    initials: "SK",
-    orbit: "outer",
-    category: "intelligence",
-    short: "Reusable packaged capabilities.",
-    description:
-      "Skills Library — curated templates and domain expertise shared across brain tiers. Composable context made tangible.",
-    connections: ["mini-brains", "baby-brains", "brain-gardener", "forge", "knowledge-graph"],
+    color: "#c084fc",
+    desc: "Packaged capabilities and domain expertise.",
   },
   {
-    id: "memory",
-    label: "Memory",
-    initials: "ME",
-    orbit: "outer",
-    category: "services",
-    short: "Persistent context across sessions.",
-    description:
-      "Long-lived context beyond a single chat. Part of local-first intelligence — owned by the builder, composed into future work.",
-    connections: ["knowledge-graph", "brain-gardener", "experience-engine", "aether"],
+    id: "agents",
+    label: "Agents",
+    color: "#34d399",
+    desc: "Configured AI workers with roles and capabilities.",
   },
   {
-    id: "prompt-compiler",
-    label: "Prompt Compiler",
-    initials: "PC",
-    orbit: "outer",
-    category: "services",
-    short: "Assembles scoped prompts from context.",
-    description:
-      "Abstract service building model-ready prompts from graph assets. Supports disciplined API usage — compilation internals are private.",
-    connections: ["big-brain", "token-optimization", "core"],
+    id: "files",
+    label: "Files",
+    color: "#2dd4bf",
+    desc: "Documents, code, and reference material.",
   },
   {
-    id: "token-optimization",
-    label: "Token Optimization",
-    initials: "TO",
-    orbit: "outer",
-    category: "services",
-    short: "Scopes context to reduce model input waste.",
-    description:
-      "Ensures only relevant context reaches external model calls. Algorithms and implementation are not disclosed here.",
-    connections: ["prompt-compiler", "baby-brains", "aether", "core"],
+    id: "models",
+    label: "Models",
+    color: "#fb7185",
+    desc: "LLM and tool endpoints available to the system.",
+  },
+  {
+    id: "workflows",
+    label: "Workflows",
+    color: "#fbbf24",
+    desc: "Multi-step processes linking agents, prompts, and outputs.",
+  },
+  {
+    id: "clients",
+    label: "Clients",
+    color: "#f59e0b",
+    desc: "External parties, accounts, or engagement contexts.",
+  },
+  {
+    id: "knowledge",
+    label: "Knowledge",
+    color: "#4ade80",
+    desc: "Structured and unstructured information assets.",
+  },
+  {
+    id: "big-brain",
+    label: "Big Brain",
+    color: "#e879f9",
+    desc: "Central orchestration — routes context and coordinates specialists.",
+  },
+  {
+    id: "mini-brains",
+    label: "Mini Brains",
+    color: "#d946ef",
+    desc: "Scoped specialists for projects, domains, or workflows.",
+  },
+  {
+    id: "baby-brains",
+    label: "Baby Brains",
+    color: "#f0abfc",
+    desc: "Lightweight task-level execution units.",
+  },
+  {
+    id: "experience-engine",
+    label: "Experience Engine",
+    color: "#818cf8",
+    desc: "Learning loop — outcomes refine future context.",
   },
   {
     id: "brain-gardener",
     label: "Brain Gardener",
-    initials: "BG",
-    orbit: "outer",
-    category: "intelligence",
-    short: "Curates knowledge health over time.",
-    description:
-      "Conceptual custodian — pruning stale context, strengthening useful connections, maintaining graph health.",
-    connections: ["knowledge-graph", "memory", "skills", "experience-engine"],
+    color: "#6ee7b7",
+    desc: "Curates and maintains knowledge health over time.",
+  },
+];
+
+const SPECIAL_ANCHORS = [
+  {
+    id: "user",
+    label: "User",
+    cluster: "flow",
+    color: "#94a3b8",
+    desc: "Builder — source of intent, goals, and context.",
+    angle: -0.85,
+    dist: 0.38,
+  },
+  {
+    id: "forge",
+    label: "Forge",
+    cluster: "ecosystem",
+    color: "#fbbf24",
+    desc: "Desktop workspace — where builders do daily AI work.",
+    angle: -0.4,
+    dist: 0.32,
   },
   {
     id: "core",
     label: "Core",
-    initials: "CR",
-    orbit: "outer",
-    category: "products",
-    short: "Shared engine and runtime.",
-    description:
-      "Foundation beneath all Crucible products — entity registry, relationships, runtime services. Private production codebase; concept only here.",
-    connections: ["crucible", "big-brain", "forge", "aether", "siege", "barrage", "prompt-compiler", "token-optimization"],
+    cluster: "ecosystem",
+    color: "#34d399",
+    desc: "Shared engine and runtime beneath all products.",
+    angle: 0.9,
+    dist: 0.34,
   },
   {
-    id: "siege",
-    label: "Siege",
-    initials: "SG",
-    orbit: "outer",
-    category: "products",
-    planned: true,
-    short: "Integration platform. Planned.",
-    description:
-      "Planned platform connecting external APIs, tools, and systems into the Crucible model. Not shipped.",
-    connections: ["core", "knowledge-graph"],
+    id: "aether",
+    label: "Aether",
+    cluster: "ecosystem",
+    color: "#a78bfa",
+    desc: "Intelligence layer — context selection and surfacing.",
+    angle: 2.1,
+    dist: 0.33,
   },
   {
-    id: "barrage",
-    label: "Barrage",
-    initials: "BR",
-    orbit: "outer",
-    category: "products",
-    planned: true,
-    short: "Cloud and team platform. Planned.",
-    description:
-      "Planned cloud platform for shared workspaces, collaborative graphs, and team-scale context. Not shipped.",
-    connections: ["core", "forge", "knowledge-graph"],
+    id: "claude",
+    label: "Claude",
+    cluster: "flow",
+    color: "#fb923c",
+    desc: "Primary model target — scoped calls against composable context.",
+    angle: 1.35,
+    dist: 0.28,
   },
 ];
 
-const CATEGORY_LABELS = {
-  hub: "Platform Core",
-  intelligence: "Intelligence",
-  services: "Platform Services",
-  products: "Ecosystem",
-  workspace: "Builder Workspace",
-};
-
-const nodeMap = Object.fromEntries(NODES.map((n) => [n.id, n]));
-
-let selectedId = null;
-let activeMode = "brain";
-let layout = {};
-let edges = [];
-
-const graphStage = document.getElementById("graph-stage");
-const nodesLayer = document.getElementById("nodes-layer");
-const pulseRings = document.getElementById("pulse-rings");
-const spokeLayer = document.getElementById("spoke-layer");
-const edgeLayer = document.getElementById("edge-layer");
+const canvas = document.getElementById("graph-canvas");
+const ctx = canvas.getContext("2d");
+const wrap = document.getElementById("canvas-wrap");
 const tooltip = document.getElementById("tooltip");
-const panelEmpty = document.getElementById("panel-empty");
-const panelContent = document.getElementById("panel-content");
-const modeToggles = document.getElementById("mode-toggles");
-const particlesCanvas = document.getElementById("particles");
+const statsEl = document.getElementById("stats");
 
-function buildEdges() {
-  const seen = new Set();
-  edges = [];
-  NODES.forEach((node) => {
-    node.connections.forEach((tid) => {
-      const key = [node.id, tid].sort().join("--");
-      if (!seen.has(key) && nodeMap[tid]) {
-        seen.add(key);
-        edges.push({ from: node.id, to: tid });
+let nodes = [];
+let edges = [];
+let adjacency = [];
+let pulses = [];
+let flashes = [];
+let signalTimer = 0;
+
+let densityKey = "medium";
+let mode = "brain";
+let pulseSpeed = 1;
+let selectedId = null;
+let hoverId = null;
+
+let cam = { x: 0, y: 0, zoom: 1 };
+let dragging = false;
+let dragStart = { x: 0, y: 0, camX: 0, camY: 0 };
+
+let width = 0;
+let height = 0;
+let dpr = 1;
+let worldR = 1;
+
+/* Seeded RNG for stable regen per density */
+function mulberry32(a) {
+  return function () {
+    let t = (a += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function generateGraph(targetCount) {
+  const rand = mulberry32(targetCount * 9973);
+  const n = [];
+  const e = [];
+  const idIndex = new Map();
+
+  const addNode = (node) => {
+    idIndex.set(node.id, n.length);
+    n.push(node);
+    return n.length - 1;
+  };
+
+  const hub = addNode({
+    id: "hub",
+    label: "The Crucible Brain",
+    cluster: "hub",
+    color: "#22d3ee",
+    isAnchor: true,
+    isHub: true,
+    x: 0,
+    y: 0,
+    r: 14,
+    desc: "Central AKOS intelligence — local-first, composable, disciplined API usage.",
+    short: "Platform brain hub",
+  });
+
+  SPECIAL_ANCHORS.forEach((a) => {
+    addNode({
+      id: a.id,
+      label: a.label,
+      cluster: a.cluster,
+      color: a.color,
+      isAnchor: true,
+      x: Math.cos(a.angle) * worldR * a.dist,
+      y: Math.sin(a.angle) * worldR * a.dist,
+      r: 9,
+      desc: a.desc,
+      short: a.label,
+    });
+  });
+
+  const perCluster = Math.max(
+    8,
+    Math.floor((targetCount - 20) / CLUSTER_DEFS.length)
+  );
+
+  CLUSTER_DEFS.forEach((def, ci) => {
+    const angle = (ci / CLUSTER_DEFS.length) * Math.PI * 2 - Math.PI / 2;
+    const dist = worldR * (0.52 + rand() * 0.12);
+    const cx = Math.cos(angle) * dist;
+    const cy = Math.sin(angle) * dist;
+
+    const anchorId = `${def.id}__anchor`;
+    const ai = addNode({
+      id: anchorId,
+      label: def.label,
+      cluster: def.id,
+      color: def.color,
+      isAnchor: true,
+      x: cx,
+      y: cy,
+      r: 8,
+      desc: def.desc,
+      short: def.label,
+    });
+
+    const satellites = perCluster - 1;
+    const clusterIndices = [];
+    for (let s = 0; s < satellites; s++) {
+      const a = rand() * Math.PI * 2;
+      const d = (0.04 + Math.sqrt(rand()) * 0.14) * worldR;
+      const idx = addNode({
+        id: `${def.id}__${s}`,
+        label: `${def.label.slice(0, 4)}·${s}`,
+        cluster: def.id,
+        color: def.color,
+        isAnchor: false,
+        x: cx + Math.cos(a) * d,
+        y: cy + Math.sin(a) * d,
+        r: 1.2 + rand() * 1.4,
+        desc: `Conceptual ${def.label.toLowerCase()} asset.`,
+        short: def.label,
+      });
+      clusterIndices.push(idx);
+    }
+
+    clusterIndices.forEach((si) => {
+      e.push({ a: ai, b: si });
+      if (rand() > 0.45) {
+        const other = clusterIndices[Math.floor(rand() * clusterIndices.length)];
+        if (other !== si) e.push({ a: si, b: other });
       }
     });
   });
-}
 
-function computeLayout() {
-  const rect = graphStage.getBoundingClientRect();
-  const cx = rect.width / 2;
-  const cy = rect.height / 2;
-  const minDim = Math.min(rect.width, rect.height);
-  const innerR = minDim * 0.21;
-  const outerR = minDim * 0.38;
-
-  layout = { crucible: { x: cx, y: cy } };
-
-  ORBIT_INNER.forEach((id, i) => {
-    const angle = (i / ORBIT_INNER.length) * Math.PI * 2 - Math.PI / 2;
-    layout[id] = { x: cx + Math.cos(angle) * innerR, y: cy + Math.sin(angle) * innerR };
-  });
-
-  ORBIT_OUTER.forEach((id, i) => {
-    const angle = (i / ORBIT_OUTER.length) * Math.PI * 2 - Math.PI / 2 + 0.15;
-    layout[id] = { x: cx + Math.cos(angle) * outerR, y: cy + Math.sin(angle) * outerR };
-  });
-}
-
-function curvePath(x1, y1, x2, y2, bend = 0.22) {
-  const mx = (x1 + x2) / 2;
-  const my = (y1 + y2) / 2;
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  const len = Math.hypot(dx, dy) || 1;
-  const cx = mx + (-dy / len) * len * bend;
-  const cy = my + (dx / len) * len * bend;
-  return `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`;
-}
-
-function renderPulseRings() {
-  const ns = "http://www.w3.org/2000/svg";
-  const { x, y } = layout.crucible;
-  pulseRings.innerHTML = "";
-  [72, 108, 148].forEach((r, i) => {
-    const c = document.createElementNS(ns, "circle");
-    c.setAttribute("cx", x);
-    c.setAttribute("cy", y);
-    c.setAttribute("r", r);
-    c.setAttribute("class", `pulse-ring pulse-${i + 1}`);
-    pulseRings.appendChild(c);
-  });
-  const glow = document.createElementNS(ns, "circle");
-  glow.setAttribute("cx", x);
-  glow.setAttribute("cy", y);
-  glow.setAttribute("r", 64);
-  glow.setAttribute("fill", "url(#hub-glow)");
-  glow.setAttribute("class", "hub-glow-disc");
-  pulseRings.appendChild(glow);
-}
-
-function renderSpokes() {
-  const ns = "http://www.w3.org/2000/svg";
-  spokeLayer.innerHTML = "";
-  const hub = layout.crucible;
-  NODES.forEach((node) => {
-    if (node.id === "crucible") return;
-    const p = layout[node.id];
-    if (!p) return;
-    const path = document.createElementNS(ns, "path");
-    path.setAttribute("d", curvePath(hub.x, hub.y, p.x, p.y, 0.08));
-    path.setAttribute("class", "spoke");
-    path.dataset.to = node.id;
-    spokeLayer.appendChild(path);
-  });
-}
-
-function renderEdges() {
-  const ns = "http://www.w3.org/2000/svg";
-  edgeLayer.innerHTML = "";
-  edges.forEach(({ from, to }) => {
-    const a = layout[from];
-    const b = layout[to];
-    if (!a || !b) return;
-    if (from === "crucible" || to === "crucible") return;
-    const path = document.createElementNS(ns, "path");
-    path.setAttribute("d", curvePath(a.x, a.y, b.x, b.y, 0.18));
-    path.setAttribute("class", "edge");
-    path.dataset.from = from;
-    path.dataset.to = to;
-    edgeLayer.appendChild(path);
-  });
-}
-
-function renderNodes() {
-  nodesLayer.innerHTML = "";
-  NODES.forEach((node, i) => {
-    const pos = layout[node.id];
-    if (!pos) return;
-
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `node ${node.category} orbit-${node.orbit}${node.planned ? " planned" : ""}`;
-    btn.dataset.id = node.id;
-    btn.style.left = `${pos.x}px`;
-    btn.style.top = `${pos.y}px`;
-    btn.setAttribute("aria-label", `${node.label}. ${node.short}`);
-    btn.setAttribute("aria-pressed", "false");
-
-    btn.innerHTML = `
-      <span class="node-card">
-        <span class="node-glow" aria-hidden="true"></span>
-        <span class="node-icon">${node.initials}</span>
-        <span class="node-label">${node.label}</span>
-      </span>
-    `;
-
-    btn.addEventListener("mouseenter", (e) => showTooltip(e, node));
-    btn.addEventListener("mousemove", moveTooltip);
-    btn.addEventListener("mouseleave", hideTooltip);
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      selectNode(node.id);
-    });
-
-    nodesLayer.appendChild(btn);
-  });
-  applyModeHighlight();
-}
-
-function getModeSet() {
-  return MODES.find((m) => m.id === activeMode)?.highlight ?? new Set();
-}
-
-function applyModeHighlight() {
-  const modeSet = getModeSet();
-  document.querySelectorAll(".node").forEach((el) => {
-    const inMode = modeSet.has(el.dataset.id);
-    el.classList.toggle("mode-active", inMode);
-    el.classList.toggle("mode-dim", !inMode && !selectedId);
-  });
-}
-
-function getRelatedIds(id) {
-  const node = nodeMap[id];
-  if (!node) return new Set();
-  return new Set([id, ...node.connections]);
-}
-
-function updateHighlights() {
-  const related = selectedId ? getRelatedIds(selectedId) : null;
-  const modeSet = getModeSet();
-
-  document.querySelectorAll(".node").forEach((el) => {
-    const id = el.dataset.id;
-    const selected = id === selectedId;
-    const inRelated = related ? related.has(id) : false;
-    const inMode = modeSet.has(id);
-
-    el.classList.toggle("selected", selected);
-    if (selectedId) {
-      el.classList.toggle("dimmed", !inRelated);
-      el.classList.toggle("mode-dim", false);
-    } else {
-      el.classList.toggle("dimmed", false);
-      el.classList.toggle("mode-dim", !inMode);
-    }
-    el.classList.toggle("mode-active", inMode && !selectedId);
-    el.setAttribute("aria-pressed", selected ? "true" : "false");
-  });
-
-  const highlightEdge = (el, from, to) => {
-    const direct =
-      selectedId &&
-      ((from === selectedId && related.has(to)) || (to === selectedId && related.has(from)));
-    const neighbor = related && related.has(from) && related.has(to);
-    el.classList.toggle("edge-hot", !!direct);
-    el.classList.toggle("edge-warm", !direct && !!neighbor);
-    el.classList.toggle("edge-dim", selectedId ? !neighbor : !modeSet.has(from) || !modeSet.has(to));
-  };
-
-  spokeLayer.querySelectorAll(".spoke").forEach((el) => {
-    const to = el.dataset.to;
-    if (selectedId) {
-      el.classList.toggle("edge-hot", related.has(to) && (to === selectedId || selectedId === "crucible"));
-      el.classList.toggle("edge-warm", related.has(to) && to !== selectedId);
-      el.classList.toggle("edge-dim", !related.has(to));
-    } else {
-      el.classList.toggle("edge-hot", false);
-      el.classList.toggle("edge-warm", modeSet.has(to));
-      el.classList.toggle("edge-dim", !modeSet.has(to));
-    }
-  });
-
-  edgeLayer.querySelectorAll(".edge").forEach((el) => {
-    highlightEdge(el, el.dataset.from, el.dataset.to);
-  });
-}
-
-function selectNode(id) {
-  if (selectedId === id) {
-    selectedId = null;
-    document.getElementById("sidebar-heading").textContent = "Select a node";
-    showPanelEmpty();
-  } else {
-    selectedId = id;
-    document.getElementById("sidebar-heading").textContent = nodeMap[id].label;
-    showPanel(nodeMap[id]);
+  for (let i = 0; i < n.length; i++) {
+    if (!n[i].isAnchor) continue;
+    e.push({ a: hub, b: i });
   }
-  updateHighlights();
+
+  const anchors = n.map((_, i) => i).filter((i) => n[i].isAnchor && !n[i].isHub);
+  const crossCount = Math.floor(anchors.length * 2.5);
+  for (let c = 0; c < crossCount; c++) {
+    const a = anchors[Math.floor(rand() * anchors.length)];
+    let b = anchors[Math.floor(rand() * anchors.length)];
+    if (a === b) continue;
+    e.push({ a, b, cross: true });
+  }
+
+  const unique = new Set();
+  const edges = [];
+  e.forEach((edge) => {
+    const key = edge.a < edge.b ? `${edge.a}-${edge.b}` : `${edge.b}-${edge.a}`;
+    if (unique.has(key)) return;
+    unique.add(key);
+    edges.push(edge);
+  });
+
+  return { nodes: n, edges };
 }
 
-function clearSelection() {
+function buildAdjacency() {
+  adjacency = nodes.map(() => []);
+  edges.forEach((edge, ei) => {
+    adjacency[edge.a].push({ node: edge.b, edgeIndex: ei });
+    adjacency[edge.b].push({ node: edge.a, edgeIndex: ei });
+  });
+}
+
+function getLocalNetwork(startIdx) {
+  const visited = new Set([startIdx]);
+  const queue = [startIdx];
+  const edgeSet = new Set();
+  let depth = 0;
+  const maxDepth = 2;
+
+  while (queue.length && depth <= maxDepth) {
+    const levelSize = queue.length;
+    for (let i = 0; i < levelSize; i++) {
+      const idx = queue.shift();
+      adjacency[idx].forEach(({ node, edgeIndex }) => {
+        edgeSet.add(edgeIndex);
+        if (!visited.has(node)) {
+          visited.add(node);
+          if (depth < maxDepth) queue.push(node);
+        }
+      });
+    }
+    depth++;
+  }
+  return { nodes: visited, edges: edgeSet };
+}
+
+function spawnWaveFrom(startIdx) {
+  const { edges: edgeSet } = getLocalNetwork(startIdx);
+  let delay = 0;
+  edgeSet.forEach((ei) => {
+    const edge = edges[ei];
+    const from =
+      adjacency[edge.a].some((x) => x.edgeIndex === ei && x.node === edge.b) ? edge.a : edge.b;
+    const to = from === edge.a ? edge.b : edge.a;
+    if (!selectedNetwork || !selectedNetwork.nodes.has(from) || !selectedNetwork.nodes.has(to))
+      return;
+    pulses.push({
+      a: from,
+      b: to,
+      t: 0,
+      delay: delay * 0.04,
+      speed: 0.35 + Math.random() * 0.15,
+    });
+    delay++;
+  });
+}
+
+let selectedNetwork = null;
+
+function selectNode(idx) {
+  if (selectedId === idx) {
+    selectedId = null;
+    selectedNetwork = null;
+    pulses = [];
+    updatePanelEmpty();
+    return;
+  }
+  selectedId = idx;
+  selectedNetwork = getLocalNetwork(idx);
+  pulses = [];
+  spawnWaveFrom(idx);
+  updatePanel(nodes[idx]);
+}
+
+function screenToWorld(sx, sy) {
+  return {
+    x: (sx - width / 2) / cam.zoom - cam.x,
+    y: (sy - height / 2) / cam.zoom - cam.y,
+  };
+}
+
+function findNodeAt(wx, wy, anchorsOnly = false) {
+  let best = -1;
+  let bestD = Infinity;
+  for (let i = 0; i < nodes.length; i++) {
+    const n = nodes[i];
+    if (anchorsOnly && !n.isAnchor) continue;
+    const hit = n.r + (n.isHub ? 8 : n.isAnchor ? 6 : 3);
+    const d = Math.hypot(n.x - wx, n.y - wy);
+    if (d < hit && d < bestD) {
+      bestD = d;
+      best = i;
+    }
+  }
+  return best;
+}
+
+function resize() {
+  const rect = wrap.getBoundingClientRect();
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = rect.width;
+  height = rect.height;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  worldR = Math.min(width, height) * 0.38;
+}
+
+function rebuild() {
+  const count = DENSITY[densityKey];
+  const g = generateGraph(count);
+  nodes = g.nodes;
+  edges = g.edges;
+  buildAdjacency();
   selectedId = null;
-  document.getElementById("sidebar-heading").textContent = "Select a node";
-  showPanelEmpty();
-  updateHighlights();
+  selectedNetwork = null;
+  pulses = [];
+  flashes = [];
+  hoverId = null;
+  updatePanelEmpty();
+  statsEl.textContent = `${nodes.length} nodes · ${edges.length} edges · mock data`;
 }
 
-function showPanelEmpty() {
-  panelEmpty.style.display = "flex";
-  panelContent.classList.remove("active");
+function flowActive(n) {
+  if (n.isHub) return true;
+  if (FLOW_HIGHLIGHT.has(n.id)) return true;
+  if (FLOW_HIGHLIGHT.has(n.cluster)) return true;
+  if (n.id.startsWith("knowledge")) return true;
+  if (n.id.startsWith("experience-engine")) return true;
+  if (n.id.startsWith("big-brain")) return true;
+  if (n.id === "user" || n.cluster === "flow") return true;
+  return false;
 }
 
-function showPanel(node) {
-  panelEmpty.style.display = "none";
-  panelContent.classList.add("active");
+function nodeAlpha(i) {
+  const n = nodes[i];
+  if (mode === "flow") {
+    return flowActive(n) ? 1 : 0.1;
+  }
+  if (selectedNetwork) {
+    return selectedNetwork.nodes.has(i) ? 1 : 0.08;
+  }
+  if (mode === "cluster") {
+    return n.isAnchor ? 1 : 0.45;
+  }
+  return n.isAnchor ? 1 : 0.55;
+}
+
+function edgeAlpha(edge, ei) {
+  if (mode === "flow") {
+    const a = flowActive(nodes[edge.a]);
+    const b = flowActive(nodes[edge.b]);
+    if (a && b) return 0.85;
+    return 0.05;
+  }
+  const alphaA = nodeAlpha(edge.a);
+  const alphaB = nodeAlpha(edge.b);
+  let alpha = Math.min(alphaA, alphaB) * (edge.cross ? 0.35 : 0.55);
+  if (selectedNetwork && selectedNetwork.edges.has(ei)) alpha = 0.95;
+  return alpha;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+
+  ctx.save();
+  ctx.translate(width / 2, height / 2);
+  ctx.scale(cam.zoom, cam.zoom);
+  ctx.translate(cam.x, cam.y);
+
+  const now = performance.now();
+
+  edges.forEach((edge, ei) => {
+    const a = nodes[edge.a];
+    const b = nodes[edge.b];
+    const alpha = edgeAlpha(edge, ei);
+
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.strokeStyle =
+      edge.cross
+        ? `rgba(167,139,250,${alpha * 0.5})`
+        : `rgba(34,211,238,${alpha * 0.4})`;
+    ctx.lineWidth = edge.cross ? 0.5 : selectedNetwork?.edges.has(ei) ? 1.2 : 0.6;
+    ctx.stroke();
+  });
+
+  pulses.forEach((p) => {
+    if (p.delay > 0) {
+      p.delay -= 0.016;
+      return;
+    }
+    p.t += 0.016 * pulseSpeed * p.speed;
+    if (p.t > 1) return;
+    const a = nodes[p.a];
+    const b = nodes[p.b];
+    const x = a.x + (b.x - a.x) * p.t;
+    const y = a.y + (b.y - a.y) * p.t;
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, 12);
+    grad.addColorStop(0, "rgba(255,255,255,0.95)");
+    grad.addColorStop(0.3, "rgba(34,211,238,0.8)");
+    grad.addColorStop(1, "rgba(34,211,238,0)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(34,211,238,0.7)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    const px = a.x + (b.x - a.x) * p.t;
+    const py = a.y + (b.y - a.y) * p.t;
+    ctx.lineTo(px, py);
+    ctx.stroke();
+
+    if (p.t >= 0.98 && !p.done) {
+      p.done = true;
+      flashes.push({ idx: p.b, until: now + 280 });
+    }
+  });
+  pulses = pulses.filter((p) => p.t <= 1 || p.delay > 0);
+
+  if (mode === "signal") {
+    signalTimer += 0.016;
+    if (signalTimer > 0.35) {
+      signalTimer = 0;
+      const ei = Math.floor(Math.random() * edges.length);
+      const edge = edges[ei];
+      pulses.push({ a: edge.a, b: edge.b, t: 0, delay: 0, speed: 0.25 + Math.random() * 0.2 });
+    }
+  }
+
+  nodes.forEach((n, i) => {
+    const alpha = nodeAlpha(i);
+    const flash = flashes.find((f) => f.idx === i && f.until > now);
+    const flashBoost = flash ? 1 : 0;
+
+    if (mode === "cluster" && n.isAnchor && !n.isHub) {
+      ctx.strokeStyle = `${n.color}33`;
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 6]);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, worldR * 0.11, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    const r = n.r + flashBoost * 3;
+    const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
+    glow.addColorStop(0, n.color + (flash ? "ff" : "cc"));
+    glow.addColorStop(1, n.color + "00");
+    ctx.fillStyle = glow;
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r * 2.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = n.color;
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (n.isAnchor || n.isHub) {
+      ctx.fillStyle = "rgba(255,255,255,0.9)";
+      ctx.font = `${n.isHub ? 7 : 5.5}px Inter, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.globalAlpha = alpha;
+      ctx.fillText(n.label.split(" ")[0], n.x, n.y - r - 5);
+    }
+    ctx.globalAlpha = 1;
+  });
+
+  if (selectedId !== null) {
+    const n = nodes[selectedId];
+    ctx.strokeStyle = "rgba(34,211,238,0.8)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r + 10, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+  flashes = flashes.filter((f) => f.until > now);
+}
+
+function loop() {
+  draw();
+  requestAnimationFrame(loop);
+}
+
+function updatePanelEmpty() {
+  document.getElementById("panel-title").textContent = "Explore the graph";
+  document.getElementById("panel-empty").style.display = "block";
+  document.getElementById("panel-content").classList.remove("active");
+}
+
+function updatePanel(node) {
+  const idx = nodes.findIndex((n) => n.id === node.id);
+  document.getElementById("panel-title").textContent = node.label;
+  document.getElementById("panel-empty").style.display = "none";
+  document.getElementById("panel-content").classList.add("active");
 
   const cat = document.getElementById("panel-category");
-  cat.className = `cat-badge ${node.category}`;
-  cat.textContent =
-    CATEGORY_LABELS[node.category] + (node.planned ? " · Planned" : "");
+  cat.textContent = node.isHub ? "Platform Core" : node.isAnchor ? "Anchor" : "Asset";
+  cat.className = "cat-badge";
 
-  document.getElementById("panel-orbit").textContent =
-    node.orbit === "center"
-      ? "Center"
-      : node.orbit === "inner"
-        ? "First orbit"
-        : "Second orbit";
+  const clusterDef = CLUSTER_DEFS.find((c) => c.id === node.cluster);
+  document.getElementById("panel-cluster").textContent =
+    clusterDef?.label || node.cluster || "Ecosystem";
 
-  document.getElementById("panel-title").textContent = node.label;
-  document.getElementById("panel-desc").textContent = node.description;
+  document.getElementById("panel-node-title").textContent = node.label;
+  document.getElementById("panel-desc").textContent = node.desc;
 
-  const relList = document.getElementById("rel-list");
-  relList.innerHTML = "";
-  node.connections.forEach((cid) => {
-    const related = nodeMap[cid];
-    if (!related) return;
+  const rel = document.getElementById("rel-list");
+  rel.innerHTML = "";
+  if (idx < 0) return;
+  const seen = new Set();
+  adjacency[idx].forEach(({ node: ni }) => {
+    const nb = nodes[ni];
+    if (!nb.isAnchor || seen.has(nb.id)) return;
+    seen.add(nb.id);
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "pill";
-    btn.textContent = related.label + (related.planned ? " · planned" : "");
-    btn.addEventListener("click", () => selectNode(cid));
-    relList.appendChild(btn);
+    btn.textContent = nb.label;
+    btn.addEventListener("click", () => selectNode(ni));
+    rel.appendChild(btn);
   });
 }
 
-function showTooltip(e, node) {
-  tooltip.textContent = node.short;
+function showTooltip(x, y, text) {
+  tooltip.textContent = text;
   tooltip.classList.add("visible");
-  moveTooltip(e);
-}
-
-function moveTooltip(e) {
-  const pad = 16;
-  let x = e.clientX + pad;
-  let y = e.clientY + pad;
-  const r = tooltip.getBoundingClientRect();
-  if (x + r.width > window.innerWidth - 10) x = e.clientX - r.width - pad;
-  if (y + r.height > window.innerHeight - 10) y = e.clientY - r.height - pad;
-  tooltip.style.left = `${x}px`;
-  tooltip.style.top = `${y}px`;
+  tooltip.style.left = `${x + 14}px`;
+  tooltip.style.top = `${y + 14}px`;
 }
 
 function hideTooltip() {
   tooltip.classList.remove("visible");
 }
 
-function setMode(modeId) {
-  activeMode = modeId;
-  modeToggles.querySelectorAll("button").forEach((btn) => {
-    btn.classList.toggle("active", btn.dataset.mode === modeId);
-    btn.setAttribute("aria-pressed", btn.dataset.mode === modeId ? "true" : "false");
-  });
-  if (!selectedId) updateHighlights();
-}
-
-function initModes() {
-  MODES.forEach((mode) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.textContent = mode.label;
-    btn.dataset.mode = mode.id;
-    btn.setAttribute("aria-pressed", mode.id === activeMode ? "true" : "false");
-    if (mode.id === activeMode) btn.classList.add("active");
-    btn.addEventListener("click", () => setMode(mode.id));
-    modeToggles.appendChild(btn);
-  });
-}
-
-function render() {
-  computeLayout();
-  renderPulseRings();
-  renderSpokes();
-  renderEdges();
-  renderNodes();
-  updateHighlights();
-}
-
-/* Subtle particle field */
-function initParticles() {
-  const ctx = particlesCanvas.getContext("2d");
-  const particles = Array.from({ length: 48 }, () => ({
-    x: Math.random(),
-    y: Math.random(),
-    r: Math.random() * 1.4 + 0.4,
-    vx: (Math.random() - 0.5) * 0.00025,
-    vy: (Math.random() - 0.5) * 0.00025,
-    a: Math.random() * 0.35 + 0.08,
-  }));
-
-  function frame() {
-    const w = (particlesCanvas.width = window.innerWidth * devicePixelRatio);
-    const h = (particlesCanvas.height = window.innerHeight * devicePixelRatio);
-    particlesCanvas.style.width = `${window.innerWidth}px`;
-    particlesCanvas.style.height = `${window.innerHeight}px`;
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach((p) => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > 1) p.vx *= -1;
-      if (p.y < 0 || p.y > 1) p.vy *= -1;
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(34, 211, 238, ${p.a})`;
-      ctx.arc(p.x * w, p.y * h, p.r * devicePixelRatio, 0, Math.PI * 2);
-      ctx.fill();
+function initControls() {
+  const modeBtns = document.getElementById("mode-btns");
+  MODES.forEach((m) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = m.label;
+    b.dataset.mode = m.id;
+    if (m.id === mode) b.classList.add("active");
+    b.addEventListener("click", () => {
+      mode = m.id;
+      modeBtns.querySelectorAll("button").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
     });
-    requestAnimationFrame(frame);
-  }
-  frame();
+    modeBtns.appendChild(b);
+  });
+
+  const densityBtns = document.getElementById("density-btns");
+  Object.keys(DENSITY).forEach((key) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+    b.dataset.density = key;
+    if (key === densityKey) b.classList.add("active");
+    b.addEventListener("click", () => {
+      densityKey = key;
+      densityBtns.querySelectorAll("button").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.density === densityKey);
+      });
+      rebuild();
+    });
+    densityBtns.appendChild(b);
+  });
+
+  document.getElementById("pulse-speed").addEventListener("input", (e) => {
+    pulseSpeed = parseFloat(e.target.value);
+  });
+
+  document.getElementById("reset-btn").addEventListener("click", () => {
+    cam = { x: 0, y: 0, zoom: 1 };
+    selectedId = null;
+    selectedNetwork = null;
+    pulses = [];
+    updatePanelEmpty();
+  });
+}
+
+let dragMoved = false;
+
+function initInput() {
+  canvas.addEventListener("mousedown", (e) => {
+    dragging = true;
+    dragMoved = false;
+    dragStart = { x: e.clientX, y: e.clientY, camX: cam.x, camY: cam.y };
+  });
+  window.addEventListener("mouseup", () => {
+    dragging = false;
+  });
+  canvas.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left;
+    const sy = e.clientY - rect.top;
+
+    if (dragging) {
+      if (Math.hypot(e.clientX - dragStart.x, e.clientY - dragStart.y) > 4) dragMoved = true;
+      cam.x = dragStart.camX + (e.clientX - dragStart.x) / cam.zoom;
+      cam.y = dragStart.camY + (e.clientY - dragStart.y) / cam.zoom;
+      hideTooltip();
+      return;
+    }
+
+    const w = screenToWorld(sx, sy);
+    const idx = findNodeAt(w.x, w.y, false);
+    if (idx >= 0 && nodes[idx].isAnchor) {
+      hoverId = idx;
+      showTooltip(e.clientX, e.clientY, nodes[idx].short + " — " + nodes[idx].desc.slice(0, 80));
+    } else {
+      hoverId = null;
+      hideTooltip();
+    }
+  });
+  canvas.addEventListener("click", (e) => {
+    if (dragMoved) return;
+    const rect = canvas.getBoundingClientRect();
+    const w = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
+    const idx = findNodeAt(w.x, w.y, true);
+    if (idx >= 0) selectNode(idx);
+  });
+  canvas.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      const factor = e.deltaY > 0 ? 0.92 : 1.08;
+      cam.zoom = Math.min(2.5, Math.max(0.4, cam.zoom * factor));
+    },
+    { passive: false }
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      selectedId = null;
+      selectedNetwork = null;
+      pulses = [];
+      updatePanelEmpty();
+    }
+  });
 }
 
 function init() {
-  buildEdges();
-  initModes();
-  initParticles();
-  render();
-  showPanelEmpty();
-
-  graphStage.addEventListener("click", (e) => {
-    if (e.target.closest(".node")) return;
-    clearSelection();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") clearSelection();
-  });
-
-  let t;
+  initControls();
+  initInput();
+  resize();
+  rebuild();
+  loop();
   window.addEventListener("resize", () => {
-    clearTimeout(t);
-    t = setTimeout(render, 100);
+    resize();
   });
 }
 
