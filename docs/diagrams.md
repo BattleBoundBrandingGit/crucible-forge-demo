@@ -193,13 +193,31 @@ graph TD
 
 ---
 
+## 5. Interactive Concept Demo
+
+A **static HTML companion** to the Mermaid diagrams — an explorable brain network you can open locally in any browser.
+
+| | |
+|---|---|
+| **Location** | [`demo/index.html`](../demo/index.html) |
+| **Stack** | HTML, CSS, JavaScript only — no build step, no backend |
+| **Data** | Mock conceptual node descriptions — not production systems |
+| **Purpose** | Visual communication for builder program review |
+
+The demo shows **The Crucible Brain** at the center with orbiting concepts (Big Brain, Mini Brains, Baby Brains, Skills, Experience Engine, Brain Gardener, platform services, and ecosystem products). Hover for summaries; click to highlight relationships and read the side panel.
+
+> **Not production.** This demo does not implement orchestration, retrieval, prompt compilation, embeddings, ranking, token optimization, or memory persistence. It is a public-safe visualization layer only.
+
+---
+
 ## Diagram Index
 
-| Diagram | Purpose | Also in |
-|---------|---------|---------|
+| Diagram / Asset | Purpose | Also in |
+|-----------------|---------|---------|
 | System Architecture | Full AKOS stack — products, intelligence, services | README, `architecture.md` |
 | Knowledge Flow | Request → context → model → learning loop | README, `vision.md` |
 | Product Roadmap | Ecosystem evolution over time | README, `roadmap.md` |
 | Entity Graph | What Forge Brain renders on canvas | README |
+| Interactive Concept Demo | Explorable brain network (static HTML) | README, `demo/` |
 
 All diagrams in this file are the **canonical source**. Other documents embed or link here.

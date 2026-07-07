@@ -4,7 +4,7 @@
 
 Forge Brain is the **early visual layer** inside [Forge](docs/vision.md) — the desktop workspace for **The Crucible**, an AI Knowledge Operating System (AKOS) built around **local-first intelligence**, **composable context**, and **disciplined API usage**.
 
-This repository is an **early public showcase** for builder program review. It contains documentation and **conceptual Mermaid diagrams** — not production code, not a finished UI, and not the private engine that powers the platform.
+This repository is an **early public showcase** for builder program review. It contains documentation, **conceptual Mermaid diagrams**, and a **static front-end concept demo** — not production code, not a finished product UI, and not the private engine that powers the platform.
 
 ---
 
@@ -12,10 +12,30 @@ This repository is an **early public showcase** for builder program review. It c
 
 | | |
 |---|---|
-| **What this repo is** | Early public showcase — vision, architecture diagrams, and Forge Brain product positioning |
-| **What this repo is not** | Production repo, shipped product, interactive demo, or proprietary implementation |
+| **What this repo is** | Early public showcase — vision, architecture diagrams, and a static Forge Brain concept demo |
+| **What this repo is not** | Production repo, shipped product, or proprietary implementation |
 
-The production Crucible platform remains **private and under active development**. Diagrams below are **directional** — they communicate intent, not deployed systems. See [IP Boundary](docs/ip-boundary.md).
+The production Crucible platform remains **private and under active development**. Diagrams and the concept demo are **directional** — they communicate intent, not deployed systems. See [IP Boundary](docs/ip-boundary.md).
+
+---
+
+## Interactive Concept Demo
+
+A **static HTML visualization** of The Crucible Brain concept — open locally, no install, no backend.
+
+**[Open `demo/index.html`](demo/index.html)** · or clone the repo and open the file in any browser.
+
+This demo is a **public concept visualization** of the Forge Brain idea. It is intentionally separated from the private production platform and contains **no proprietary backend, AI orchestration logic, retrieval systems, or real memory implementation** — only mock, high-level node data.
+
+| Feature | Description |
+|---------|-------------|
+| Central hub | **The Crucible Brain** — platform intelligence concept |
+| Orbiting nodes | Big Brain, Mini Brains, Baby Brains, Skills, Experience Engine, Brain Gardener, and ecosystem products |
+| Hover | Short public-safe explanation per node |
+| Click | Highlights relationships + side panel detail |
+| Style | Dark, glowing network — startup product-demo feel |
+
+*This is not the production Forge Brain graph canvas. That interactive prototype is still in development.*
 
 ---
 
@@ -212,15 +232,15 @@ graph TD
 
 ## Target Prototype Capabilities
 
-Interactive demo **not yet in this repo**. Planned Forge Brain interaction-layer features:
+The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A full **Forge Brain graph canvas** (zoom, pan, entity nodes, timeline/focus modes) is still planned:
 
-| Capability | Description |
-|------------|-------------|
-| Interactive graph canvas | Explore assets as a connected network |
-| Zoom, pan, drag, minimap | Navigate large graphs |
-| Relationship edges | See how entities connect |
-| Focus · Timeline · Cluster modes | Multiple views of the same graph |
-| Aether mode | Preview intelligence-layer context surfacing |
+| Capability | Status |
+|------------|--------|
+| Static brain network visualization | **Available** — `demo/index.html` |
+| Interactive entity graph canvas | Planned |
+| Zoom, pan, drag, minimap | Planned |
+| Focus · Timeline · Cluster modes | Planned |
+| Aether mode preview | Planned |
 
 ---
 
@@ -229,7 +249,8 @@ Interactive demo **not yet in this repo**. Planned Forge Brain interaction-layer
 | Area | Status |
 |------|--------|
 | Architecture diagrams (Mermaid) | **Available** — conceptual only |
-| Forge Brain interactive prototype | **Planned** — not in this repo |
+| Static concept demo (`demo/`) | **Available** — front-end only, mock data |
+| Forge Brain graph canvas prototype | **Planned** |
 | Screenshots / GIFs | **Not created** |
 | Core engine / Forge desktop | **In development** — private repo |
 | Full platform launch | **Not yet** |
@@ -247,19 +268,21 @@ Interactive demo **not yet in this repo**. Planned Forge Brain interaction-layer
 | [Architecture](docs/architecture.md) | High-level system design |
 | [Roadmap](docs/roadmap.md) | Alpha, Beta, and Future phases |
 | [IP Boundary](docs/ip-boundary.md) | Public vs. private delineation |
+| [Application Visuals](docs/visuals/claude-application/) | Diagrams and one-pager for builder program review |
 
 ---
 
 ## Getting Started
 
-Documentation-only today — nothing to run or install.
-
 ```bash
 git clone https://github.com/BattleBoundBrandingGit/crucible-forge-demo.git
 cd crucible-forge-demo
+open demo/index.html   # macOS — or open demo/index.html in any browser
 ```
 
-Start with [docs/diagrams.md](docs/diagrams.md), then read [docs/vision.md](docs/vision.md).
+1. **Try the concept demo** — [`demo/index.html`](demo/index.html)
+2. **Read the diagrams** — [docs/diagrams.md](docs/diagrams.md)
+3. **Read the vision** — [docs/vision.md](docs/vision.md)
 
 ---
 

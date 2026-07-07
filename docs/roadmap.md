@@ -42,12 +42,13 @@ flowchart LR
 |------|--------|-------|
 | Public showcase documentation | **Done** | Vision, architecture, roadmap, IP boundary |
 | Architecture diagrams (Mermaid) | **Done** | System, knowledge flow, roadmap — [diagrams.md](diagrams.md) |
+| Static concept demo (`demo/`) | **Done** | Front-end brain network — mock data, no backend |
 | Product positioning & accuracy note | **Done** | No overclaiming production readiness |
-| Interactive graph canvas | **Planned** | First prototype not yet in this repo |
+| Interactive entity graph canvas | **Planned** | Full Forge Brain graph prototype |
 | Navigation modes | **Planned** | Focus, timeline, cluster, Aether preview |
-| Screenshots / GIFs | **Planned** | Not created — Mermaid diagrams stand in for now |
-| Sample graph dataset | **Planned** | Representative nodes across entity types |
-| Local demo instructions | **Planned** | When interactive prototype ships |
+| Screenshots / GIFs | **Planned** | Not created yet |
+| Sample graph dataset | **Planned** | Representative entity nodes for canvas prototype |
+| Local demo instructions | **Done** | Open `demo/index.html` in browser |
 
 ### Alpha Success Criteria
 

@@ -20,7 +20,7 @@ This document defines what **this public showcase repository** includes and what
 | **Ecosystem overview** | High-level roles of The Crucible, Core, Forge, Forge Brain, Aether, Siege, and Barrage |
 | **Forge Brain prototype** | Planned interactive graph demo — not yet in this repository |
 | **High-level architecture** | Layered system diagram, entity-relationship model (abstract), data flow (simplified) |
-| **Conceptual diagrams** | Mermaid system architecture, knowledge flow, roadmap, and entity graph — [diagrams.md](diagrams.md) |
+| **Conceptual diagrams** | Mermaid system architecture, knowledge flow, roadmap, entity graph, and [claude-application visuals](visuals/claude-application/) |
 | **Roadmap** | Alpha, Beta, and Future phases with honest development status |
 | **Visual assets** | Planned screenshots and GIFs — **not created yet**; placeholder paths documented only |
 | **Documentation** | README, vision, architecture, roadmap, diagrams, and this IP boundary document |

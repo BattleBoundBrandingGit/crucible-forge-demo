@@ -193,3 +193,9 @@ See [IP Boundary](ip-boundary.md).
 ## This Showcase
 
 This repository contains **documentation and Mermaid diagrams only**. Production systems are developed in a separate, private repository.
+
+## Application Visuals
+
+Polished diagrams and a one-pager for builder program applications:
+
+**[docs/visuals/claude-application/](visuals/claude-application/)** — ecosystem map, Core Brain Engine pipeline, knowledge flow, and reviewer one-pager.
