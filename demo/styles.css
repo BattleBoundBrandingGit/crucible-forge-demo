@@ -184,9 +184,28 @@ body {
 }
 
 .btn-row button:hover,
-.reset-btn:hover {
+.reset-btn:hover,
+.export-btn:hover {
   color: var(--text);
   border-color: rgba(34, 211, 238, 0.4);
+}
+
+.export-btn {
+  font-family: var(--font);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--cyan);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background: rgba(34, 211, 238, 0.18);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.15);
 }
 
 .btn-row button.active {
@@ -225,18 +244,7 @@ body {
 }
 
 .hub-label {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -52px);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(34, 211, 238, 0.85);
-  text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-  pointer-events: none;
-  z-index: 2;
+  display: none;
 }
 
 .stats {
@@ -438,11 +446,6 @@ body {
     border-left: none;
     border-top: 1px solid var(--border);
     max-height: 38vh;
-  }
-
-  .hub-label {
-    font-size: 0.62rem;
-    transform: translate(-50%, -42px);
   }
 }
 

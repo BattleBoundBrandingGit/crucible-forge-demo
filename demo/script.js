@@ -4,6 +4,10 @@
  */
 
 const DENSITY = { low: 300, medium: 700, high: 1400 };
+const DEFAULT_DENSITY = "medium";
+const DEFAULT_ZOOM = 1.12;
+const WORLD_RADIUS_FACTOR = 0.47;
+const EXPORT_SCALE = 2;
 
 const MODES = [
   { id: "brain", label: "Brain Map" },
@@ -176,13 +180,13 @@ let pulses = [];
 let flashes = [];
 let signalTimer = 0;
 
-let densityKey = "medium";
+let densityKey = DEFAULT_DENSITY;
 let mode = "brain";
 let pulseSpeed = 1;
 let selectedId = null;
 let hoverId = null;
 
-let cam = { x: 0, y: 0, zoom: 1 };
+let cam = { x: 0, y: 0, zoom: DEFAULT_ZOOM };
 let dragging = false;
 let dragStart = { x: 0, y: 0, camX: 0, camY: 0 };
 
@@ -222,7 +226,7 @@ function generateGraph(targetCount) {
     isHub: true,
     x: 0,
     y: 0,
-    r: 14,
+    r: 16,
     desc: "Central AKOS intelligence — local-first, composable, disciplined API usage.",
     short: "Platform brain hub",
   });
@@ -249,7 +253,7 @@ function generateGraph(targetCount) {
 
   CLUSTER_DEFS.forEach((def, ci) => {
     const angle = (ci / CLUSTER_DEFS.length) * Math.PI * 2 - Math.PI / 2;
-    const dist = worldR * (0.52 + rand() * 0.12);
+    const dist = worldR * (0.58 + rand() * 0.1);
     const cx = Math.cos(angle) * dist;
     const cy = Math.sin(angle) * dist;
 
@@ -271,7 +275,7 @@ function generateGraph(targetCount) {
     const clusterIndices = [];
     for (let s = 0; s < satellites; s++) {
       const a = rand() * Math.PI * 2;
-      const d = (0.04 + Math.sqrt(rand()) * 0.14) * worldR;
+      const d = (0.05 + Math.sqrt(rand()) * 0.16) * worldR;
       const idx = addNode({
         id: `${def.id}__${s}`,
         label: `${def.label.slice(0, 4)}·${s}`,
@@ -425,22 +429,7 @@ function resize() {
   canvas.style.width = `${width}px`;
   canvas.style.height = `${height}px`;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  worldR = Math.min(width, height) * 0.38;
-}
-
-function rebuild() {
-  const count = DENSITY[densityKey];
-  const g = generateGraph(count);
-  nodes = g.nodes;
-  edges = g.edges;
-  buildAdjacency();
-  selectedId = null;
-  selectedNetwork = null;
-  pulses = [];
-  flashes = [];
-  hoverId = null;
-  updatePanelEmpty();
-  statsEl.textContent = `${nodes.length} nodes · ${edges.length} edges · mock data`;
+  worldR = Math.min(width, height) * WORLD_RADIUS_FACTOR;
 }
 
 function flowActive(n) {
@@ -465,7 +454,7 @@ function nodeAlpha(i) {
   if (mode === "cluster") {
     return n.isAnchor ? 1 : 0.45;
   }
-  return n.isAnchor ? 1 : 0.55;
+  return n.isAnchor ? 1 : 0.58;
 }
 
 function edgeAlpha(edge, ei) {
@@ -482,13 +471,28 @@ function edgeAlpha(edge, ei) {
   return alpha;
 }
 
-function draw() {
-  ctx.clearRect(0, 0, width, height);
+function paint(targetCtx, w, h) {
+  targetCtx.fillStyle = "#050810";
+  targetCtx.fillRect(0, 0, w, h);
 
-  ctx.save();
-  ctx.translate(width / 2, height / 2);
-  ctx.scale(cam.zoom, cam.zoom);
-  ctx.translate(cam.x, cam.y);
+  const vignette = targetCtx.createRadialGradient(
+    w / 2,
+    h / 2,
+    w * 0.08,
+    w / 2,
+    h / 2,
+    Math.max(w, h) * 0.72
+  );
+  vignette.addColorStop(0, "rgba(34, 211, 238, 0.07)");
+  vignette.addColorStop(0.45, "rgba(88, 28, 135, 0.04)");
+  vignette.addColorStop(1, "rgba(4, 6, 10, 0.92)");
+  targetCtx.fillStyle = vignette;
+  targetCtx.fillRect(0, 0, w, h);
+
+  targetCtx.save();
+  targetCtx.translate(w / 2, h / 2);
+  targetCtx.scale(cam.zoom, cam.zoom);
+  targetCtx.translate(cam.x, cam.y);
 
   const now = performance.now();
 
@@ -496,16 +500,16 @@ function draw() {
     const a = nodes[edge.a];
     const b = nodes[edge.b];
     const alpha = edgeAlpha(edge, ei);
+    const edgeBoost = mode === "brain" && !selectedNetwork ? 1.15 : 1;
 
-    ctx.beginPath();
-    ctx.moveTo(a.x, a.y);
-    ctx.lineTo(b.x, b.y);
-    ctx.strokeStyle =
-      edge.cross
-        ? `rgba(167,139,250,${alpha * 0.5})`
-        : `rgba(34,211,238,${alpha * 0.4})`;
-    ctx.lineWidth = edge.cross ? 0.5 : selectedNetwork?.edges.has(ei) ? 1.2 : 0.6;
-    ctx.stroke();
+    targetCtx.beginPath();
+    targetCtx.moveTo(a.x, a.y);
+    targetCtx.lineTo(b.x, b.y);
+    targetCtx.strokeStyle = edge.cross
+      ? `rgba(167,139,250,${alpha * 0.55 * edgeBoost})`
+      : `rgba(34,211,238,${alpha * 0.48 * edgeBoost})`;
+    targetCtx.lineWidth = edge.cross ? 0.55 : selectedNetwork?.edges.has(ei) ? 1.25 : 0.65;
+    targetCtx.stroke();
   });
 
   pulses.forEach((p) => {
@@ -519,23 +523,23 @@ function draw() {
     const b = nodes[p.b];
     const x = a.x + (b.x - a.x) * p.t;
     const y = a.y + (b.y - a.y) * p.t;
-    const grad = ctx.createRadialGradient(x, y, 0, x, y, 12);
+    const grad = targetCtx.createRadialGradient(x, y, 0, x, y, 12);
     grad.addColorStop(0, "rgba(255,255,255,0.95)");
     grad.addColorStop(0.3, "rgba(34,211,238,0.8)");
     grad.addColorStop(1, "rgba(34,211,238,0)");
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(x, y, 10, 0, Math.PI * 2);
-    ctx.fill();
+    targetCtx.fillStyle = grad;
+    targetCtx.beginPath();
+    targetCtx.arc(x, y, 10, 0, Math.PI * 2);
+    targetCtx.fill();
 
-    ctx.strokeStyle = "rgba(34,211,238,0.7)";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(a.x, a.y);
+    targetCtx.strokeStyle = "rgba(34,211,238,0.7)";
+    targetCtx.lineWidth = 2;
+    targetCtx.beginPath();
+    targetCtx.moveTo(a.x, a.y);
     const px = a.x + (b.x - a.x) * p.t;
     const py = a.y + (b.y - a.y) * p.t;
-    ctx.lineTo(px, py);
-    ctx.stroke();
+    targetCtx.lineTo(px, py);
+    targetCtx.stroke();
 
     if (p.t >= 0.98 && !p.done) {
       p.done = true;
@@ -560,52 +564,92 @@ function draw() {
     const flashBoost = flash ? 1 : 0;
 
     if (mode === "cluster" && n.isAnchor && !n.isHub) {
-      ctx.strokeStyle = `${n.color}33`;
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 6]);
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, worldR * 0.11, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      targetCtx.strokeStyle = `${n.color}44`;
+      targetCtx.lineWidth = 1;
+      targetCtx.setLineDash([4, 6]);
+      targetCtx.beginPath();
+      targetCtx.arc(n.x, n.y, worldR * 0.12, 0, Math.PI * 2);
+      targetCtx.stroke();
+      targetCtx.setLineDash([]);
     }
 
     const r = n.r + flashBoost * 3;
-    const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
+    const glow = targetCtx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
     glow.addColorStop(0, n.color + (flash ? "ff" : "cc"));
     glow.addColorStop(1, n.color + "00");
-    ctx.fillStyle = glow;
-    ctx.globalAlpha = alpha;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, r * 2.5, 0, Math.PI * 2);
-    ctx.fill();
+    targetCtx.fillStyle = glow;
+    targetCtx.globalAlpha = alpha;
+    targetCtx.beginPath();
+    targetCtx.arc(n.x, n.y, r * 2.5, 0, Math.PI * 2);
+    targetCtx.fill();
 
-    ctx.fillStyle = n.color;
-    ctx.globalAlpha = alpha;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-    ctx.fill();
+    targetCtx.fillStyle = n.color;
+    targetCtx.globalAlpha = alpha;
+    targetCtx.beginPath();
+    targetCtx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    targetCtx.fill();
 
     if (n.isAnchor || n.isHub) {
-      ctx.fillStyle = "rgba(255,255,255,0.9)";
-      ctx.font = `${n.isHub ? 7 : 5.5}px Inter, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.globalAlpha = alpha;
-      ctx.fillText(n.label.split(" ")[0], n.x, n.y - r - 5);
+      targetCtx.fillStyle = "rgba(255,255,255,0.92)";
+      targetCtx.textAlign = "center";
+      targetCtx.globalAlpha = alpha;
+      if (n.isHub) {
+        targetCtx.font = "bold 8px Inter, sans-serif";
+        targetCtx.fillText("Crucible Brain", n.x, n.y - r - 6);
+      } else {
+        targetCtx.font = "600 6px Inter, sans-serif";
+        targetCtx.fillText(n.label, n.x, n.y - r - 5);
+      }
     }
-    ctx.globalAlpha = 1;
+    targetCtx.globalAlpha = 1;
   });
 
   if (selectedId !== null) {
     const n = nodes[selectedId];
-    ctx.strokeStyle = "rgba(34,211,238,0.8)";
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, n.r + 10, 0, Math.PI * 2);
-    ctx.stroke();
+    targetCtx.strokeStyle = "rgba(34,211,238,0.8)";
+    targetCtx.lineWidth = 1.5;
+    targetCtx.beginPath();
+    targetCtx.arc(n.x, n.y, n.r + 10, 0, Math.PI * 2);
+    targetCtx.stroke();
   }
 
-  ctx.restore();
+  targetCtx.restore();
   flashes = flashes.filter((f) => f.until > now);
+}
+
+function rebuild() {
+  const count = DENSITY[densityKey];
+  const g = generateGraph(count);
+  nodes = g.nodes;
+  edges = g.edges;
+  buildAdjacency();
+  selectedId = null;
+  selectedNetwork = null;
+  pulses = [];
+  flashes = [];
+  hoverId = null;
+  updatePanelEmpty();
+  statsEl.textContent = `${nodes.length} nodes · ${edges.length} edges · ${densityKey} · mock data`;
+}
+
+function draw() {
+  paint(ctx, width, height);
+}
+
+function exportPng() {
+  hideTooltip();
+  const exportCanvas = document.createElement("canvas");
+  exportCanvas.width = Math.floor(width * dpr * EXPORT_SCALE);
+  exportCanvas.height = Math.floor(height * dpr * EXPORT_SCALE);
+  const exportCtx = exportCanvas.getContext("2d");
+  exportCtx.setTransform(dpr * EXPORT_SCALE, 0, 0, dpr * EXPORT_SCALE, 0, 0);
+  paint(exportCtx, width, height);
+
+  const link = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0, 10);
+  link.download = `forge-brain-${mode}-${densityKey}-${stamp}.png`;
+  link.href = exportCanvas.toDataURL("image/png");
+  link.click();
 }
 
 function loop() {
@@ -703,12 +747,14 @@ function initControls() {
   });
 
   document.getElementById("reset-btn").addEventListener("click", () => {
-    cam = { x: 0, y: 0, zoom: 1 };
+    cam = { x: 0, y: 0, zoom: DEFAULT_ZOOM };
     selectedId = null;
     selectedNetwork = null;
     pulses = [];
     updatePanelEmpty();
   });
+
+  document.getElementById("export-btn").addEventListener("click", exportPng);
 }
 
 let dragMoved = false;

@@ -31,9 +31,22 @@ A **living knowledge graph** — hundreds of interconnected mock nodes rendered 
 | **15 domain clusters** | Projects, Prompts, Memories, Skills, Agents, Files, Models, Workflows, Clients, Knowledge, Big/Mini/Baby Brains, Experience Engine, Brain Gardener |
 | **Signal waves** | Click an anchor — electric pulses travel along edges |
 | **Display modes** | Brain Map · Knowledge Flow · Cluster View · Signal View |
-| **Navigation** | Pan (drag) · Zoom (scroll) · Reset view |
+| **Navigation** | Pan (drag) · Zoom (scroll) · Reset view · Export PNG |
 
 Mock conceptual data only — **no backend, no production graph, not proprietary.**
+
+### Screenshots
+
+1. Open [`demo/index.html`](demo/index.html) in Chrome or Safari (full window works best).
+2. Leave **Density** on **Medium** (default) for the best balance of detail and performance.
+3. Click **Reset view** to frame the graph before capturing.
+4. Switch modes for different shots:
+   - **Brain Map** — full dense network
+   - **Knowledge Flow** — highlighted User → Forge → Brain → Claude → Experience Engine path
+   - **Cluster View** — domain halos around anchor nodes
+   - **Signal View** — continuous faint pulses (great for motion stills; pause by switching mode)
+5. Click **Export PNG** to save the **graph canvas only** at 2× resolution (`forge-brain-{mode}-{density}-{date}.png`).
+6. For a full-page screenshot (header + sidebar + graph), use the browser’s screenshot tool — Export PNG is graph-only by design.
 
 *Entity-level Forge Brain canvas (zoom, pan, project nodes) remains in development.*
 
@@ -251,7 +264,7 @@ The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A ful
 | Architecture diagrams (Mermaid) | **Available** — conceptual only |
 | Static concept demo (`demo/`) | **Available** — front-end only, mock data |
 | Forge Brain graph canvas prototype | **Planned** |
-| Screenshots / GIFs | **Not created** |
+| Screenshots / GIFs | **Use Export PNG** in `demo/` — graph canvas at 2× |
 | Core engine / Forge desktop | **In development** — private repo |
 | Full platform launch | **Not yet** |
 

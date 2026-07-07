@@ -241,3 +241,43 @@ Development log for the crucible-forge-demo public showcase repository.
 **Recommended next step:**
 
 - Screenshot Signal View with wave on Big Brain anchor for application; commit and push
+
+---
+
+## 2026-07-07 · 6:53 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Final polish pass on Forge Brain demo — larger graph framing, screenshot readiness, Export PNG, README screenshot guide.
+
+**Files/folders created or changed:**
+
+- `demo/index.html` (Export PNG button)
+- `demo/styles.css` (export button styling; hub label moved to canvas)
+- `demo/script.js` (larger layout, vignette background, 2× PNG export, default zoom)
+- `README.md` (screenshot how-to section)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Medium density confirmed as default (`DEFAULT_DENSITY`)
+- Graph scaled larger: `WORLD_RADIUS_FACTOR` 0.47, wider clusters, default zoom 1.12
+- Canvas vignette background and brighter default edges for screenshot readability
+- Hub and anchor labels rendered on canvas (“Crucible Brain”, full anchor names)
+- **Export PNG** — offscreen 2× render via shared `paint()`; downloads graph canvas only
+- README **Screenshots** section with mode and export workflow
+- Static only — mock data, no backend
+
+**Verification status:**
+
+- `node --check demo/script.js` — pass
+- Manual: open demo, Reset view, Export PNG
+
+**Assumptions made:**
+
+- Graph-only export is sufficient; full-page capture left to browser screenshot tools
+- HTML hub label hidden because canvas now draws the hub title
+
+**Recommended next step:**
+
+- Export PNGs for Brain Map, Knowledge Flow, and Signal View; commit and push
