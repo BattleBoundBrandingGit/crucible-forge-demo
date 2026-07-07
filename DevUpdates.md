@@ -121,3 +121,83 @@ Development log for the crucible-forge-demo public showcase repository.
 **Recommended next step:**
 
 - Commit and push; export diagram PNGs via mermaid.live for application submission
+
+---
+
+## 2026-07-07 · 6:42 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Polish static interactive Forge Brain HTML demo — full Crucible Brain network with ecosystem, intelligence, and services modules; aligned with docs/visuals package.
+
+**Files/folders created or changed:**
+
+- `demo/index.html` (updated)
+- `demo/styles.css` (updated)
+- `demo/script.js` (updated)
+- `README.md` (updated — demo node list)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Rebuilt demo with 17 nodes: central Crucible Brain, 5 ecosystem products, 6 intelligence concepts, 5 platform services (including **Automation**)
+- Three-ring layout (Ecosystem · Intelligence · Services) with SVG ring guides
+- Hover tooltips, click-to-select, direct + soft relationship edge highlighting, side panel with layer tags
+- Accessible node buttons, Escape to deselect, responsive layout
+- Dark polished visual style with hub pulse and float animations
+- Link to application visuals package from demo header; README demo table updated
+
+**Verification status:**
+
+- Static files only — open `demo/index.html` in browser to verify
+- No backend, no private logic, mock conceptual data only
+
+**Assumptions made:**
+
+- Siege and Barrage remain marked planned; all copy is public-safe per ip-boundary.md
+- Docs link works when viewing from local filesystem or GitHub
+
+**Recommended next step:**
+
+- Screenshot demo with a node selected for Claude application materials; commit and push
+
+---
+
+## 2026-07-07 · 6:44 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Premium cinematic redesign of static Forge Brain demo — radial brain map, curved glowing edges, display modes, particles, polished sidebar.
+
+**Files/folders created or changed:**
+
+- `demo/index.html` (redesigned)
+- `demo/styles.css` (redesigned)
+- `demo/script.js` (redesigned)
+- `README.md` (updated — stronger Interactive Concept Demo section)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Structured radial map: center Crucible Brain, first orbit (5 nodes), second orbit (10 nodes) per spec
+- Curved SVG spokes and relationship paths with glow filter and selection highlighting
+- Animated pulse rings and canvas particle background
+- Hero header, notice bar, mode toggles (Ecosystem / Brain / Knowledge Flow)
+- Larger node cards with initials, category colors, hover scale and glow
+- Premium sidebar with badges, pills, public/private boundary note
+- Responsive layout for tablet and mobile
+- Static only — mock conceptual data, no backend
+
+**Verification status:**
+
+- Manual: open `demo/index.html` in browser
+- No automated tests; static front-end only
+
+**Assumptions made:**
+
+- Display modes are visual-only highlights (no layout rearrangement) to keep logic public-safe and simple
+- Siege and Barrage remain planned; all copy matches ip-boundary.md
+
+**Recommended next step:**
+
+- Capture screenshots in each display mode for Claude Max for Builders application; commit and push

@@ -21,21 +21,24 @@ The production Crucible platform remains **private and under active development*
 
 ## Interactive Concept Demo
 
-A **static HTML visualization** of The Crucible Brain concept — open locally, no install, no backend.
+A **premium static HTML brain map** — cinematic, screenshot-ready, and open locally with no install.
 
-**[Open `demo/index.html`](demo/index.html)** · or clone the repo and open the file in any browser.
-
-This demo is a **public concept visualization** of the Forge Brain idea. It is intentionally separated from the private production platform and contains **no proprietary backend, AI orchestration logic, retrieval systems, or real memory implementation** — only mock, high-level node data.
+**[Open `demo/index.html`](demo/index.html)**
 
 | Feature | Description |
 |---------|-------------|
-| Central hub | **The Crucible Brain** — platform intelligence concept |
-| Orbiting nodes | Big Brain, Mini Brains, Baby Brains, Skills, Experience Engine, Brain Gardener, and ecosystem products |
-| Hover | Short public-safe explanation per node |
-| Click | Highlights relationships + side panel detail |
-| Style | Dark, glowing network — startup product-demo feel |
+| **Radial brain map** | Large central Crucible Brain with first and second orbit modules |
+| **Curved neural edges** | Glowing SVG relationship lines that highlight on selection |
+| **Display modes** | Ecosystem View · Brain View · Knowledge Flow (visual-only toggles) |
+| **Sidebar brief** | Category badges, explanations, clickable connection pills |
+| **Atmosphere** | Particle field, pulse rings, dark cinematic gradients |
 
-*This is not the production Forge Brain graph canvas. That interactive prototype is still in development.*
+**First orbit:** Big Brain · Knowledge Graph · Experience Engine · Aether · Forge  
+**Second orbit:** Mini Brains · Baby Brains · Skills · Memory · Prompt Compiler · Token Optimization · Brain Gardener · Core · Siege · Barrage
+
+Mock conceptual data only — **no backend, no proprietary orchestration, not production.**
+
+*The full Forge Brain entity graph canvas (zoom, pan, project nodes) remains in development.*
 
 ---
 

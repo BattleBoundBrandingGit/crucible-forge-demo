@@ -1,74 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Forge Brain — public concept demo for The Crucible AI Knowledge Operating System. Front-end visualization only." />
-  <title>Forge Brain — Visual Intelligence Layer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="bg-atmosphere" aria-hidden="true"></div>
-  <div class="bg-grid" aria-hidden="true"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Forge Brain — premium public concept demo for The Crucible AI Knowledge Operating System."
+    />
+    <title>Forge Brain — Visual Intelligence Layer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="bg-vignette" aria-hidden="true"></div>
+    <div class="bg-neural" aria-hidden="true"></div>
 
-  <div class="app">
-    <header class="header">
-      <div class="header-text">
-        <h1>Forge Brain — Visual Intelligence Layer</h1>
-        <p class="subtitle">A public concept demo for The Crucible AI Knowledge Operating System</p>
+    <div class="app">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="hero-brand">
+            <span class="hero-eyebrow">The Crucible · AKOS</span>
+            <h1>Forge Brain</h1>
+            <p class="hero-tagline">Visual Intelligence Layer</p>
+          </div>
+          <div class="hero-meta">
+            <a class="hero-link" href="../docs/visuals/claude-application/README.md">Application visuals</a>
+            <span class="hero-badge">Concept Demo</span>
+          </div>
+        </div>
+        <div class="notice-bar" role="note">
+          <span class="notice-dot" aria-hidden="true"></span>
+          Static public concept demo — no backend, no proprietary orchestration logic.
+        </div>
+      </header>
+
+      <div class="mode-bar" role="toolbar" aria-label="Display mode">
+        <span class="mode-label">View</span>
+        <div class="mode-toggles" id="mode-toggles"></div>
       </div>
-      <span class="concept-badge">Concept Demo · Not Production</span>
-    </header>
 
-    <main class="main">
-      <section class="graph-wrap" id="graph-wrap" aria-label="Crucible Brain knowledge graph">
-        <svg id="graph-svg" aria-hidden="true"></svg>
-        <div id="nodes-layer"></div>
+      <main class="stage">
+        <section class="graph-stage" id="graph-stage" aria-label="Crucible Brain radial map">
+          <svg id="graph-svg" aria-hidden="true">
+            <defs>
+              <filter id="edge-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <radialGradient id="hub-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(34,211,238,0.35)" />
+                <stop offset="100%" stop-color="rgba(34,211,238,0)" />
+              </radialGradient>
+            </defs>
+            <g id="pulse-rings"></g>
+            <g id="spoke-layer"></g>
+            <g id="edge-layer"></g>
+          </svg>
+          <div id="nodes-layer"></div>
 
-        <aside class="legend" aria-label="Legend">
-          <h3>Legend</h3>
-          <div class="legend-items">
-            <div class="legend-item"><span class="legend-swatch intelligence"></span> Intelligence architecture</div>
-            <div class="legend-item"><span class="legend-swatch services"></span> Platform services (abstract)</div>
-            <div class="legend-item"><span class="legend-swatch products"></span> Ecosystem products</div>
-            <div class="legend-item"><span class="legend-swatch visual"></span> Builder workspace</div>
-            <div class="legend-item"><span class="legend-swatch planned"></span> Planned</div>
+          <aside class="legend-card" aria-label="Legend">
+            <h3>Map Legend</h3>
+            <ul class="legend-list">
+              <li><span class="dot inner"></span> First orbit — core systems</li>
+              <li><span class="dot outer"></span> Second orbit — platform layer</li>
+              <li><span class="dot planned"></span> Planned product</li>
+            </ul>
+            <p class="legend-tip">Click a node · Press Esc to clear</p>
+          </aside>
+        </section>
+
+        <aside class="sidebar" aria-label="Node details">
+          <div class="sidebar-head">
+            <span class="sidebar-label">Intelligence Brief</span>
+            <h2 id="sidebar-heading">Select a node</h2>
           </div>
-          <p class="legend-hint">Hover for a summary · Click to explore relationships</p>
-        </aside>
-
-        <p class="footer-strip">Mock conceptual data only · No backend · No proprietary orchestration logic</p>
-      </section>
-
-      <aside class="panel" aria-label="Node details">
-        <div class="panel-header">
-          <h2>Selected Node</h2>
-        </div>
-        <div class="panel-body">
-          <div class="panel-empty" id="panel-empty">
-            <strong>Click any node</strong> to highlight its relationships and read a public-safe description of its role in The Crucible ecosystem.
-          </div>
-          <div class="panel-content" id="panel-content">
-            <span class="panel-category" id="panel-category"></span>
-            <h3 class="panel-title" id="panel-title"></h3>
-            <p class="panel-desc" id="panel-desc"></p>
-            <div class="panel-section">
-              <h4>Connected Concepts</h4>
-              <ul class="rel-list" id="rel-list"></ul>
+          <div class="sidebar-body">
+            <div class="sidebar-empty" id="panel-empty">
+              <div class="empty-icon" aria-hidden="true">◎</div>
+              <p>
+                Explore the radial brain map. Each node is a <strong>public-safe concept</strong> —
+                not production code.
+              </p>
             </div>
-            <p class="panel-disclaimer">
-              This panel describes product vision at a high level. Implementation details, orchestration logic, and production systems are not included in this public demo.
-            </p>
+            <div class="sidebar-content" id="panel-content">
+              <div class="badge-row">
+                <span class="cat-badge" id="panel-category"></span>
+                <span class="orbit-badge" id="panel-orbit"></span>
+              </div>
+              <h3 class="node-title" id="panel-title"></h3>
+              <p class="node-desc" id="panel-desc"></p>
+              <div class="conn-section">
+                <h4>Connected concepts</h4>
+                <div class="pill-row" id="rel-list"></div>
+              </div>
+              <div class="boundary-note">
+                <strong>Public showcase boundary.</strong> Proprietary retrieval, prompt compiler
+                internals, embeddings, ranking, and production memory logic are not represented
+                here.
+              </div>
+            </div>
           </div>
-        </div>
-      </aside>
-    </main>
-  </div>
+        </aside>
+      </main>
+    </div>
 
-  <div class="tooltip" id="tooltip" role="tooltip"></div>
-  <script src="script.js"></script>
-</body>
+    <div class="tooltip" id="tooltip" role="tooltip"></div>
+    <script src="script.js"></script>
+  </body>
 </html>
