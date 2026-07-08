@@ -1,0 +1,23 @@
+%% The Crucible — Product Ecosystem
+graph TB
+    CRUCIBLE["The Crucible<br/><i>AI Knowledge Operating System</i>"]
+
+    FORGE["Forge<br/><i>Desktop Workspace</i>"]
+    FBRAIN["Forge Brain<br/><i>Visual Intelligence Layer</i>"]
+    BARRAGE["Barrage<br/><i>Cloud Platform</i>"]
+    SIEGE["Siege<br/><i>Integration Platform</i>"]
+    AETHER["Aether<br/><i>Intelligence Layer</i>"]
+    CORE["Core<br/><i>Shared Runtime & Intelligence Engine</i>"]
+
+    CRUCIBLE --> FORGE
+    CRUCIBLE --> BARRAGE
+    CRUCIBLE --> SIEGE
+    FORGE --> FBRAIN
+    FORGE --> CORE
+    BARRAGE --> CORE
+    SIEGE --> CORE
+    AETHER -. "organizes · connects · improves" .-> CORE
+
+    style CRUCIBLE fill:#1a1512,color:#ffffff,stroke:#EA580C,stroke-width:2px
+    style FBRAIN fill:#FFF1E6,stroke:#EA580C
+    style CORE fill:#FFF1E6,stroke:#EA580C

@@ -281,3 +281,94 @@ Development log for the crucible-forge-demo public showcase repository.
 **Recommended next step:**
 
 - Export PNGs for Brain Map, Knowledge Flow, and Signal View; commit and push
+
+---
+
+## 2026-07-07 · 6:57 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Polish repository for public showcase — organize assets, rename screenshots, professional README landing page, fix links.
+
+**Files/folders created or changed:**
+
+- `assets/README.md` (created)
+- `assets/diagrams/.gitkeep` (created)
+- `assets/logos/.gitkeep` (created)
+- `assets/screenshots/*.png` (renamed — removed date suffixes)
+- `README.md` (rewritten — hero, Screenshots gallery, section reorder)
+- `docs/ip-boundary.md` (updated asset paths and demo status)
+- `docs/diagrams.md` (screenshot cross-reference)
+- `docs/visuals/claude-application/README.md` (points to `assets/`)
+- `demo/script.js` (export filename matches canonical naming)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- `assets/` structure: `screenshots/`, `diagrams/`, `logos/`
+- Screenshots renamed: `forge-brain-{mode}-{density}.png` (no timestamps)
+- README opens with hero + embedded screenshot gallery (Brain Map, Knowledge Flow, Signal View)
+- `assets/README.md` documents naming, folders, and future videos/GIFs/logos
+- Visual package and IP boundary updated to new asset locations
+- Export PNG download uses canonical filename pattern
+- Link verification: all 5 README image paths resolve; ip-boundary relative paths fixed
+
+**Verification status:**
+
+- Python link checker: 5/5 README images OK; anchor-only “broken” links are false positives
+- All screenshot PNGs present in `assets/screenshots/`
+- No references to old `docs/visuals/forge-brain-*.png` paths
+
+**Assumptions made:**
+
+- `forge-brain-brain-medium-2026-07-07-2.png` renamed to `forge-brain-brain-high.png` (second Brain Map capture)
+- Full-page browser screenshots remain optional; committed assets are canvas exports only
+
+**Recommended next step:**
+
+- Export Mermaid diagrams to `assets/diagrams/`; add `.gitignore` for `.DS_Store`; commit and push
+
+---
+
+## 2026-07-07 · 7:00 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Organize Claude-generated product overview package — docs/product, docs/diagrams sources, tools/build_pdf, screenshot canonical names, README showcase polish.
+
+**Files/folders created or changed:**
+
+- `docs/product/` — `The-Crucible-Product-Overview.pdf`, `.md`, `README.md`
+- `docs/diagrams/` — five `.mermaid` files + `README.md`
+- `tools/build_pdf.py` (moved from root; output path updated)
+- `assets/screenshots/` — renamed showcase PNGs; extras in `archive/`
+- `README.md`, `assets/README.md`, `docs/diagrams.md`, `docs/ip-boundary.md`
+- `docs/visuals/claude-application/README.md`, `demo/script.js`
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Product overview PDF and Markdown moved to `docs/product/`
+- Mermaid sources moved from root `diagrams/` to `docs/diagrams/`
+- `build_pdf.py` moved to `tools/`; writes `docs/product/The-Crucible-Product-Overview.pdf`
+- Showcase screenshots: `forge-brain-brain-map`, `knowledge-flow`, `signal-view`; alternates archived
+- README restructured: hero → screenshots → demo → product PDF → diagrams → IP boundary
+- `docs/product/README.md` and `docs/diagrams/README.md` added
+- Export PNG uses showcase filenames (`forge-brain-brain-map.png`, etc.)
+- Cross-links updated across visual package and IP boundary
+
+**Verification status:**
+
+- `node --check demo/script.js` — pass
+- Markdown link checker: 3/3 README images resolve; product PDF path resolves
+- No links to old root paths (`diagrams/`, `build_pdf.py`, timestamped PNG names)
+
+**Assumptions made:**
+
+- `forge-brain-brain-medium.png` renamed to `forge-brain-brain-map.png` as canonical Brain Map
+- Low/high density alternates kept in `assets/screenshots/archive/` not deleted
+- `docs/diagrams.md` (embedded Mermaid) coexists with `docs/diagrams/` (source files)
+
+**Recommended next step:**
+
+- Commit and push; export Mermaid PNGs to `assets/diagrams/`; add `.gitignore` for `.DS_Store` and `Archive.zip`

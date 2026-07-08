@@ -18,11 +18,12 @@ This document defines what **this public showcase repository** includes and what
 |----------|-----------------|
 | **Product vision** | The Crucible as a platform — local-first intelligence, composable context, disciplined API usage |
 | **Ecosystem overview** | High-level roles of The Crucible, Core, Forge, Forge Brain, Aether, Siege, and Barrage |
-| **Forge Brain prototype** | Planned interactive graph demo — not yet in this repository |
+| **Product overview** | PDF + Markdown package — [`product/The-Crucible-Product-Overview.pdf`](product/The-Crucible-Product-Overview.pdf) |
+| **Forge Brain concept demo** | Interactive static graph demo — [`demo/index.html`](../demo/index.html) |
 | **High-level architecture** | Layered system diagram, entity-relationship model (abstract), data flow (simplified) |
 | **Conceptual diagrams** | Mermaid system architecture, knowledge flow, roadmap, entity graph, and [claude-application visuals](visuals/claude-application/) |
 | **Roadmap** | Alpha, Beta, and Future phases with honest development status |
-| **Visual assets** | Planned screenshots and GIFs — **not created yet**; placeholder paths documented only |
+| **Visual assets** | Forge Brain screenshots in [`assets/screenshots/`](../assets/screenshots/); diagram exports planned in [`assets/diagrams/`](../assets/diagrams/) |
 | **Documentation** | README, vision, architecture, roadmap, diagrams, and this IP boundary document |
 
 ### Acceptable Level of Detail

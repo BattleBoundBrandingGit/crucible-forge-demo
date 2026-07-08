@@ -1,0 +1,32 @@
+%% The Crucible — Platform Architecture (high level)
+graph TB
+    subgraph SURFACES["Surfaces"]
+        FORGE["Forge — desktop workspace"]
+        FBRAIN["Forge Brain — visual layer"]
+    end
+
+    subgraph INTELLIGENCE["Intelligence"]
+        AETHER["Aether — ambient intelligence"]
+        EXP["Experience Engine — how you work"]
+        KG["Knowledge Graph — what you know"]
+    end
+
+    subgraph RUNTIME["Runtime"]
+        CORE["Core — state · sync · shared services"]
+    end
+
+    subgraph EDGES["Connectivity"]
+        BARRAGE["Barrage — cloud sync & collaboration"]
+        SIEGE["Siege — integrations & tools"]
+        MODELS["Models — Claude · local · specialized"]
+    end
+
+    FORGE --> CORE
+    FBRAIN --> KG
+    AETHER --> KG
+    EXP --> KG
+    CORE --> BARRAGE
+    CORE --> SIEGE
+    CORE --> MODELS
+
+    style KG fill:#1a1512,color:#ffffff,stroke:#EA580C,stroke-width:2px

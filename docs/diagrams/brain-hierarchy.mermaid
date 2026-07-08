@@ -1,0 +1,22 @@
+%% The Crucible — Brain Architecture (conceptual)
+graph TD
+    BB["Big Brain<br/><i>everything you know — source of truth</i>"]
+    MB1["Mini Brain<br/><i>Client A</i>"]
+    MB2["Mini Brain<br/><i>Product X</i>"]
+    MB3["Mini Brain<br/><i>Research Domain</i>"]
+    BB1["Baby Brain<br/><i>task working set</i>"]
+    BB2["Baby Brain<br/><i>task working set</i>"]
+    SK["Skills<br/><i>packaged capabilities</i>"]
+    GARD["Brain Gardener<br/><i>merge · prune · strengthen · flag</i>"]
+
+    BB --> MB1
+    BB --> MB2
+    BB --> MB3
+    MB1 --> BB1
+    MB2 --> BB2
+    BB --- SK
+    GARD -. "continuous maintenance" .-> BB
+
+    style BB fill:#1a1512,color:#ffffff,stroke:#EA580C,stroke-width:2px
+    style GARD fill:#FFF1E6,stroke:#EA580C
+    style SK fill:#FFF1E6,stroke:#EA580C

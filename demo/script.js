@@ -16,6 +16,13 @@ const MODES = [
   { id: "signal", label: "Signal View" },
 ];
 
+const EXPORT_MODE_NAMES = {
+  brain: "brain-map",
+  flow: "knowledge-flow",
+  cluster: "cluster-view",
+  signal: "signal-view",
+};
+
 const FLOW_HIGHLIGHT = new Set([
   "hub",
   "user",
@@ -646,8 +653,8 @@ function exportPng() {
   paint(exportCtx, width, height);
 
   const link = document.createElement("a");
-  const stamp = new Date().toISOString().slice(0, 10);
-  link.download = `forge-brain-${mode}-${densityKey}-${stamp}.png`;
+  const exportName = EXPORT_MODE_NAMES[mode] || mode;
+  link.download = `forge-brain-${exportName}.png`;
   link.href = exportCanvas.toDataURL("image/png");
   link.click();
 }

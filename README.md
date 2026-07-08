@@ -1,259 +1,147 @@
-# Forge Brain
+<p align="center">
+  <strong style="font-size: 2em">Forge Brain</strong><br/>
+  <em>Visual Intelligence Layer for<br/>The Crucible AI Knowledge Operating System</em>
+</p>
 
-**Visual intelligence layer for The Crucible**
+<p align="center">
+  <a href="demo/index.html">Try the demo</a> ·
+  <a href="docs/product/The-Crucible-Product-Overview.pdf">Product overview (PDF)</a> ·
+  <a href="docs/diagrams/">Diagram sources</a> ·
+  <a href="docs/ip-boundary.md">Public / private boundary</a>
+</p>
 
-Forge Brain is the **early visual layer** inside [Forge](docs/vision.md) — the desktop workspace for **The Crucible**, an AI Knowledge Operating System (AKOS) built around **local-first intelligence**, **composable context**, and **disciplined API usage**.
-
-This repository is an **early public showcase** for builder program review. It contains documentation, **conceptual Mermaid diagrams**, and a **static front-end concept demo** — not production code, not a finished product UI, and not the private engine that powers the platform.
+<p align="center">
+  <sub>Early public showcase · Mock data only · Production implementation remains private</sub>
+</p>
 
 ---
 
-## Accuracy Note
+## Screenshots
 
-| | |
-|---|---|
-| **What this repo is** | Early public showcase — vision, architecture diagrams, and a static Forge Brain concept demo |
-| **What this repo is not** | Production repo, shipped product, or proprietary implementation |
+Exported from the [interactive concept demo](demo/index.html) — Canvas graph with **mock conceptual nodes only**.
 
-The production Crucible platform remains **private and under active development**. Diagrams and the concept demo are **directional** — they communicate intent, not deployed systems. See [IP Boundary](docs/ip-boundary.md).
+<p align="center">
+  <img src="assets/screenshots/forge-brain-brain-map.png" alt="Brain Map — living knowledge graph" width="720"/>
+</p>
+<p align="center"><strong>Brain Map</strong> — dense interconnected knowledge graph</p>
+
+<br/>
+
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/screenshots/forge-brain-knowledge-flow.png" alt="Knowledge Flow mode" width="340"/><br/>
+      <strong>Knowledge Flow</strong><br/>
+      <sub>User → Forge → Brain → Claude → Experience Engine</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/screenshots/forge-brain-signal-view.png" alt="Signal View mode" width="340"/><br/>
+      <strong>Signal View</strong><br/>
+      <sub>Continuous pulses across the network</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <a href="assets/screenshots/"><strong>All screenshots</strong></a> ·
+  <a href="assets/README.md">Asset guide</a>
+</p>
 
 ---
 
 ## Interactive Concept Demo
 
-A **living knowledge graph** — hundreds of interconnected mock nodes rendered on Canvas with traveling signal pulses.
-
-**[Open `demo/index.html`](demo/index.html)**
+**[Open `demo/index.html`](demo/index.html)** — static HTML/CSS/JS, no install, no backend.
 
 | Feature | Description |
 |---------|-------------|
-| **Dense brain map** | 300–1,400 nodes · 1,000+ edges (density control) |
+| **Living knowledge graph** | 300–1,400 mock nodes · 1,000+ edges (density control) |
 | **15 domain clusters** | Projects, Prompts, Memories, Skills, Agents, Files, Models, Workflows, Clients, Knowledge, Big/Mini/Baby Brains, Experience Engine, Brain Gardener |
 | **Signal waves** | Click an anchor — electric pulses travel along edges |
 | **Display modes** | Brain Map · Knowledge Flow · Cluster View · Signal View |
-| **Navigation** | Pan (drag) · Zoom (scroll) · Reset view · Export PNG |
+| **Controls** | Pan · Zoom · Reset view · Export PNG |
 
-Mock conceptual data only — **no backend, no production graph, not proprietary.**
+<details>
+<summary><strong>Capturing screenshots</strong></summary>
 
-### Screenshots
+1. Open the demo full-screen in Chrome or Safari.
+2. Use **Medium** density (default) for the primary Brain Map shot.
+3. **Reset view** before export.
+4. **Export PNG** saves a 2× canvas capture — rename to match [`assets/README.md`](assets/README.md).
 
-1. Open [`demo/index.html`](demo/index.html) in Chrome or Safari (full window works best).
-2. Leave **Density** on **Medium** (default) for the best balance of detail and performance.
-3. Click **Reset view** to frame the graph before capturing.
-4. Switch modes for different shots:
-   - **Brain Map** — full dense network
-   - **Knowledge Flow** — highlighted User → Forge → Brain → Claude → Experience Engine path
-   - **Cluster View** — domain halos around anchor nodes
-   - **Signal View** — continuous faint pulses (great for motion stills; pause by switching mode)
-5. Click **Export PNG** to save the **graph canvas only** at 2× resolution (`forge-brain-{mode}-{density}-{date}.png`).
-6. For a full-page screenshot (header + sidebar + graph), use the browser’s screenshot tool — Export PNG is graph-only by design.
-
-*Entity-level Forge Brain canvas (zoom, pan, project nodes) remains in development.*
+</details>
 
 ---
 
-## The Problem
+## Product Overview
 
-Builders repeat the same expensive AI setup every session: re-explaining context, re-finding files, re-configuring agents, re-pasting prompts, and re-paying token and API costs. There is no map of what exists or how it connects.
-
-**The Crucible** exists to fix that — as a platform, not a chat window.
-
----
-
-## System Architecture
-
-The Crucible is an **AI Knowledge Operating System**: ecosystem products above a shared engine, with intelligence concepts and platform services at a high level.
-
-```mermaid
-graph TB
-    subgraph akos["The Crucible — AI Knowledge Operating System"]
-        direction TB
-
-        subgraph products["Ecosystem Products"]
-            direction LR
-            forge["Forge<br/><i>Desktop Workspace</i>"]
-            aether["Aether<br/><i>Intelligence Layer</i>"]
-            siege["Siege<br/><i>Integration Platform</i><br/>(planned)"]
-            barrage["Barrage<br/><i>Cloud / Team Platform</i><br/>(planned)"]
-        end
-
-        subgraph forgeLayer["Forge — Visual Layer"]
-            fb["Forge Brain<br/><i>Graph Surface</i><br/>(showcase focus)"]
-        end
-
-        subgraph core["Core — Shared Engine / Runtime"]
-            direction TB
-
-            subgraph intelligence["Intelligence Architecture <i>(conceptual)</i>"]
-                direction LR
-                bb["Big Brain<br/><i>Central orchestration</i>"]
-                mb["Mini Brains<br/><i>Scoped specialists</i>"]
-                baby["Baby Brains<br/><i>Task-level units</i>"]
-                sl["Skills Library"]
-                ee["Experience Engine<br/><i>Learning loop</i>"]
-                bg["Brain Gardener<br/><i>Knowledge curation</i>"]
-            end
-
-            subgraph services["Platform Services <i>(abstract)</i>"]
-                direction LR
-                kg["Knowledge Graph"]
-                mem["Memory"]
-                pc["Prompt Compiler"]
-                to["Token Optimization"]
-                auto["Automation"]
-            end
-        end
-    end
-
-    forge --> fb
-    fb --> bb
-    bb --> mb
-    bb --> baby
-    mb --> sl
-    baby --> sl
-    bb --> kg
-    kg --> mem
-    bb --> pc
-    pc --> to
-    ee --> bb
-    bg --> kg
-    bg --> mem
-    aether --> bb
-    aether --> kg
-    auto --> bb
-    siege -.-> core
-    barrage -.-> core
-    forge --> core
-```
-
-*Conceptual diagram — not production topology. Full annotations: [docs/diagrams.md](docs/diagrams.md#1-system-architecture)*
+| Resource | Description |
+|----------|-------------|
+| **[The Crucible Product Overview (PDF)](docs/product/The-Crucible-Product-Overview.pdf)** | Polished reviewer document — problem, vision, ecosystem, roadmap narrative |
+| [Markdown source](docs/product/The-Crucible-Product-Overview.md) | Editable overview text |
+| [Product package README](docs/product/README.md) | What the overview includes and how to regenerate the PDF |
 
 ---
 
-## Knowledge Flow
+## Architecture Diagrams
 
-How context composes, reaches a model, and compounds back into the brain layer.
+| Resource | Description |
+|----------|-------------|
+| [**Mermaid sources**](docs/diagrams/) | `ecosystem`, `platform-architecture`, `knowledge-flow`, `brain-hierarchy`, `roadmap` |
+| [Embedded diagrams (Markdown)](docs/diagrams.md) | Canonical Mermaid blocks used in docs and README |
+| [Application visual package](docs/visuals/claude-application/) | Annotated diagrams for builder program review |
+| [Vision](docs/vision.md) · [Architecture](docs/architecture.md) · [Roadmap](docs/roadmap.md) | Supporting documentation |
 
 ```mermaid
 flowchart LR
     user(["Builder"])
-    forge["Forge<br/><i>Desktop Workspace</i>"]
-    bb["Big Brain<br/><i>Orchestration</i>"]
-    kg["Knowledge Graph"]
-    skills["Skills Library /<br/>Mini Brains"]
-    model["Claude or<br/>Other AI Model"]
-    response["Better Response<br/><i>Scoped · Provenance-aware</i>"]
+    forge["Forge"]
+    brain["Forge Brain / Big Brain"]
+    model["Claude"]
     ee["Experience Engine"]
-    brain["Brain Layer<br/><i>Memory + Graph update</i>"]
 
-    user -->|"intent + focus"| forge
-    forge -->|"composed request"| bb
-    bb -->|"resolve context"| kg
-    kg -->|"relevant assets"| skills
-    skills -->|"scoped prompt + context"| model
-    model -->|"model output"| response
-    response -->|"outcome signal"| ee
-    ee -->|"learn + refine"| brain
-    brain -->|"enriched knowledge"| kg
-    brain -.->|"updated context"| bb
-    response -->|"deliver"| forge
-    forge -->|"present"| user
+    user --> forge --> brain --> model
+    model --> ee --> brain
 ```
 
-*Logical flow — not proprietary orchestration code. Details: [docs/diagrams.md](docs/diagrams.md#2-knowledge-flow)*
+*Simplified public flow — not proprietary orchestration. [Full diagram →](docs/diagrams.md#2-knowledge-flow)*
 
 ---
 
-## Product Roadmap
+## Public Showcase · IP Boundary
 
-```mermaid
-flowchart LR
-    mvp["Forge MVP<br/><i>Desktop workspace ·<br/>Forge Brain graph</i>"]
-    local["Local AI<br/><i>Local-first intelligence ·<br/>on-device context</i>"]
-    team["Team Collaboration<br/><i>Barrage · shared graphs</i>"]
-    market["Marketplace<br/><i>Skills · templates ·<br/>shared knowledge</i>"]
-    ent["Enterprise /<br/>Ecosystem<br/><i>Siege integrations ·<br/>full AKOS scale</i>"]
+This repository is an **early public showcase** for builder program review.
 
-    mvp -->|"now → near-term"| local
-    local -->|"mid-term"| team
-    team -->|"long-term"| market
-    market -->|"horizon"| ent
-```
+| **Included** | **Not included** |
+|--------------|------------------|
+| Vision, product overview PDF, conceptual diagrams | Production Core engine source |
+| Static Forge Brain concept demo (mock data) | Proprietary backend or orchestration |
+| Showcase screenshots and Mermaid sources | Retrieval, embeddings, ranking implementation |
+| Honest roadmap and development status | Prompt compiler internals or production memory logic |
 
-**Current stage:** Forge MVP / early showcase. Full platform not launched. Details: [docs/roadmap.md](docs/roadmap.md) · [docs/diagrams.md](docs/diagrams.md#3-product-roadmap)
+Full delineation: **[IP Boundary](docs/ip-boundary.md)**
 
 ---
 
-## Platform Principles
+## What It Is
 
-| Principle | What it means |
-|-----------|---------------|
-| **Local-first intelligence** | Context and knowledge live close to the builder — owned, not trapped in a vendor cloud |
-| **Composable context** | Prompts, files, memories, and skills assemble into reusable bundles |
-| **Disciplined API usage** | Model calls are scoped, intentional, and traceable — less token and API waste |
+Forge Brain is the **visual intelligence layer** inside [Forge](docs/vision.md) — where builders see how projects, prompts, memories, skills, agents, and knowledge connect across **The Crucible** AKOS.
+
+Built on **local-first intelligence**, **composable context**, and **disciplined API usage**.
 
 ---
 
-## Ecosystem at a Glance
+## Ecosystem
 
 | Product | Role | Status |
 |---------|------|--------|
-| **The Crucible** | AI Knowledge Operating System — the platform | In development |
-| **Core** | Shared engine and runtime | Private — not in this repo |
+| **The Crucible** | AI Knowledge Operating System | In development |
+| **Core** | Shared engine / runtime | Private |
 | **Forge** | Desktop workspace | In development |
-| **Forge Brain** | Graph surface inside Forge — **this showcase** | Early public showcase |
+| **Forge Brain** | Graph surface — **this showcase** | Early public demo |
 | **Aether** | Intelligence layer | In development |
 | **Siege** | Integration platform | Planned |
 | **Barrage** | Cloud / team platform | Planned |
-
----
-
-## What Forge Brain Visualizes
-
-Forge Brain maps relationships across a builder's practice — projects, prompts, files, agents, memories, skills, models, workflows, clients, and knowledge.
-
-```mermaid
-graph TD
-    client["Client"] -->|owns| project["Project"]
-    project -->|contains| prompt["Prompt"]
-    project -->|contains| agent["Agent"]
-    project -->|contains| memory["Memory"]
-    agent -->|uses| prompt
-    agent -->|powered_by| model["Model"]
-    agent -->|equipped_with| skill["Skill"]
-    agent -->|references| file["File"]
-    workflow["Workflow"] -->|chains| agent
-    memory -->|draws_from| knowledge["Knowledge"]
-    file -->|sources| knowledge
-    skill -->|supports| knowledge
-```
-
-*Conceptual canvas view — not a screenshot. Interactive prototype planned.*
-
----
-
-## Why Forge Brain Exists
-
-- **Reduce repeated setup** — See what exists before rebuilding context
-- **Reuse composable context** — Skills, memories, and bundles travel with the work
-- **Reduce token and API waste** — Scope what reaches the model
-- **Preserve provenance** — Trace sources and references across the graph
-- **Make large knowledge feel small** — Focus on the subgraph that matters now
-- **Organize AI work visually** — See the whole practice, not just the latest chat
-
----
-
-## Target Prototype Capabilities
-
-The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A full **Forge Brain graph canvas** (zoom, pan, entity nodes, timeline/focus modes) is still planned:
-
-| Capability | Status |
-|------------|--------|
-| Static brain network visualization | **Available** — `demo/index.html` |
-| Interactive entity graph canvas | Planned |
-| Zoom, pan, drag, minimap | Planned |
-| Focus · Timeline · Cluster modes | Planned |
-| Aether mode preview | Planned |
 
 ---
 
@@ -261,12 +149,12 @@ The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A ful
 
 | Area | Status |
 |------|--------|
-| Architecture diagrams (Mermaid) | **Available** — conceptual only |
-| Static concept demo (`demo/`) | **Available** — front-end only, mock data |
-| Forge Brain graph canvas prototype | **Planned** |
-| Screenshots / GIFs | **Use Export PNG** in `demo/` — graph canvas at 2× |
-| Core engine / Forge desktop | **In development** — private repo |
-| Full platform launch | **Not yet** |
+| Product overview PDF | **Available** — [`docs/product/`](docs/product/) |
+| Interactive concept demo | **Available** — [`demo/index.html`](demo/index.html) |
+| Showcase screenshots | **Available** — [`assets/screenshots/`](assets/screenshots/) |
+| Mermaid diagram sources | **Available** — [`docs/diagrams/`](docs/diagrams/) |
+| Production Forge Brain canvas | **Planned** |
+| Core / Forge desktop app | **In development** — private repo |
 
 **Maintainer:** Austin Brower
 
@@ -276,12 +164,14 @@ The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A ful
 
 | Document | Description |
 |----------|-------------|
-| [Diagrams](docs/diagrams.md) | **Canonical source** for all Mermaid architecture visuals |
-| [Vision](docs/vision.md) | AKOS thesis and design principles |
+| [Product overview](docs/product/) | PDF + Markdown package |
+| [Diagram sources](docs/diagrams/) | Reusable `.mermaid` files |
+| [Diagrams (embedded)](docs/diagrams.md) | Canonical Markdown Mermaid |
+| [Vision](docs/vision.md) | AKOS thesis |
 | [Architecture](docs/architecture.md) | High-level system design |
-| [Roadmap](docs/roadmap.md) | Alpha, Beta, and Future phases |
-| [IP Boundary](docs/ip-boundary.md) | Public vs. private delineation |
-| [Application Visuals](docs/visuals/claude-application/) | Diagrams and one-pager for builder program review |
+| [Roadmap](docs/roadmap.md) | Alpha · Beta · Future |
+| [IP Boundary](docs/ip-boundary.md) | Public vs. private |
+| [Assets](assets/README.md) | Screenshots and media |
 
 ---
 
@@ -290,12 +180,12 @@ The **[concept demo](demo/index.html)** visualizes the AKOS brain network. A ful
 ```bash
 git clone https://github.com/BattleBoundBrandingGit/crucible-forge-demo.git
 cd crucible-forge-demo
-open demo/index.html   # macOS — or open demo/index.html in any browser
+open demo/index.html
 ```
 
-1. **Try the concept demo** — [`demo/index.html`](demo/index.html)
-2. **Read the diagrams** — [docs/diagrams.md](docs/diagrams.md)
-3. **Read the vision** — [docs/vision.md](docs/vision.md)
+1. **Read the product overview** — [PDF](docs/product/The-Crucible-Product-Overview.pdf)
+2. **Try the demo** — [`demo/index.html`](demo/index.html)
+3. **Browse diagrams** — [`docs/diagrams/`](docs/diagrams/)
 
 ---
 

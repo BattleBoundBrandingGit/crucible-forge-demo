@@ -28,6 +28,8 @@ Polished Mermaid diagrams and a one-pager for **Anthropic Claude Max for Builder
 | [vision.md](../../vision.md)             | All visuals, one-pager                         |
 | [architecture.md](../../architecture.md) | Ecosystem, pipeline, knowledge flow, one-pager |
 | [diagrams.md](../../diagrams.md)         | Ecosystem, knowledge flow (companion diagrams) |
+| [diagrams/](../../diagrams/)               | Standalone `.mermaid` source files           |
+| [product/](../../product/)                 | Product overview PDF package                 |
 | [roadmap.md](../../roadmap.md)           | One-pager, product evolution context           |
 | [ip-boundary.md](../../ip-boundary.md)   | Scope and public/private delineation           |
 
@@ -51,20 +53,21 @@ Use this checklist when preparing application materials. Export diagrams as **PN
 - [ ] **Ecosystem diagram** — full platform map with Core intelligence layer
 - [ ] **Core Brain Engine pipeline** — MVP vs Phase 2 / Future boundaries visible
 - [ ] **Knowledge flow** — capture → engine → reuse → Claude → feedback loop
+- [x] **Product overview PDF** — [`docs/product/The-Crucible-Product-Overview.pdf`](../../product/The-Crucible-Product-Overview.pdf)
 - [ ] **One-pager** — export `claude-application-one-pager.md` to PDF
-- [ ] **Concept demo** — screenshot of [demo/index.html](../../../demo/index.html) with a node selected
+- [x] **Concept demo** — [`assets/screenshots/`](../../../assets/screenshots/) (Brain Map, Knowledge Flow, Signal View)
 - [ ] **README hero** — architecture diagram section from root [README.md](../../../README.md)
 
 **Suggested filenames** (after export):
 
-```
-crucible-ecosystem.png
-core-brain-engine-pipeline.png
-knowledge-flow.png
-forge-brain-concept-demo.png
-```
+| Asset | Location |
+|-------|----------|
+| `crucible-ecosystem.png` | [`assets/diagrams/`](../../../assets/diagrams/) |
+| `core-brain-engine-pipeline.png` | [`assets/diagrams/`](../../../assets/diagrams/) |
+| `knowledge-flow.png` | [`assets/diagrams/`](../../../assets/diagrams/) |
+| `forge-brain-brain-map.png` | [`assets/screenshots/`](../../../assets/screenshots/) |
 
-Place exported images in this folder alongside the Markdown sources.
+See [`assets/README.md`](../../../assets/README.md) for naming conventions. Mermaid sources: [`docs/diagrams/`](../../diagrams/).
 
 ---
 
@@ -77,7 +80,7 @@ No export tooling is bundled in this repository. Use one of these lightweight op
 1. Open [mermaid.live](https://mermaid.live)
 2. Copy the ` ```mermaid ` block from any diagram file
 3. Export as PNG or SVG
-4. Save to `docs/visuals/claude-application/`
+4. Save to [`assets/diagrams/`](../../../assets/diagrams/)
 
 ### Option B — VS Code / Cursor
 
@@ -95,8 +98,8 @@ No export tooling is bundled in this repository. Use one of these lightweight op
 
 ```bash
 npx -p @mermaid-js/mermaid-cli mmdc \
-  -i docs/visuals/claude-application/ecosystem.mmd \
-  -o docs/visuals/claude-application/crucible-ecosystem.png
+  -i docs/diagrams/ecosystem.mermaid \
+  -o assets/diagrams/crucible-ecosystem.png
 ```
 
 To use CLI, first save the mermaid block to a standalone `.mmd` file. No CLI dependency is added to this repo by default.
@@ -105,7 +108,7 @@ To use CLI, first save the mermaid block to a standalone `.mmd` file. No CLI dep
 
 ## Branding
 
-No logo assets are currently in this repository. Use typography and diagram styling as-is, or add brand assets to this folder when available.
+Logo assets are not yet in this repository. When available, place them in [`assets/logos/`](../../../assets/logos/). See [`assets/README.md`](../../../assets/README.md).
 
 ---
 

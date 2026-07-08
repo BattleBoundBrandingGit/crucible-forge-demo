@@ -2,6 +2,8 @@
 
 Visual architecture for The Crucible and Forge Brain — rendered as Mermaid so GitHub displays them inline.
 
+Standalone `.mermaid` sources for export live in [`diagrams/`](diagrams/) (see [diagrams/README.md](diagrams/README.md)).
+
 > **Early public showcase.** These diagrams are **conceptual and directional**. They describe product vision and high-level architecture only. They do not represent shipped software, production topology, or proprietary implementation. The production Crucible platform remains private and under active development.
 
 ---
@@ -200,6 +202,7 @@ A **static HTML companion** to the Mermaid diagrams — an explorable brain netw
 | | |
 |---|---|
 | **Location** | [`demo/index.html`](../demo/index.html) |
+| **Screenshots** | [`assets/screenshots/`](../assets/screenshots/) — exported Brain Map, Knowledge Flow, Signal View |
 | **Stack** | HTML, CSS, JavaScript only — no build step, no backend |
 | **Data** | Mock conceptual node descriptions — not production systems |
 | **Purpose** | Visual communication for builder program review |
@@ -218,6 +221,6 @@ The demo shows **The Crucible Brain** at the center with orbiting concepts (Big 
 | Knowledge Flow | Request → context → model → learning loop | README, `vision.md` |
 | Product Roadmap | Ecosystem evolution over time | README, `roadmap.md` |
 | Entity Graph | What Forge Brain renders on canvas | README |
-| Interactive Concept Demo | Explorable brain network (static HTML) | README, `demo/` |
+| Interactive Concept Demo | Explorable brain network (static HTML) | README, `demo/`, `assets/screenshots/` |
 
 All diagrams in this file are the **canonical source**. Other documents embed or link here.
