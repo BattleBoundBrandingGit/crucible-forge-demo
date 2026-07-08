@@ -372,3 +372,40 @@ Development log for the crucible-forge-demo public showcase repository.
 **Recommended next step:**
 
 - Commit and push; export Mermaid PNGs to `assets/diagrams/`; add `.gitignore` for `.DS_Store` and `Archive.zip`
+
+---
+
+## 2026-07-07 · 7:05 PM (UTC-5)
+
+**AI model/tool used:** Cursor · Auto
+
+**Prompt/task summary:** Add root `index.html` and `vercel.json` for Vercel deployment — root URL opens Forge Brain demo.
+
+**Files/folders created or changed:**
+
+- `index.html` (created — meta refresh + JS redirect to `demo/index.html`)
+- `vercel.json` (created — static rewrites for `/demo`)
+- `README.md` (live demo URL placeholder)
+- `DevUpdates.md` (appended)
+
+**What was completed:**
+
+- Root landing redirects visitors to `demo/index.html` immediately
+- Visible fallback link: “Open Forge Brain Demo”
+- Demo files remain in `demo/` (not moved)
+- `vercel.json` rewrite for `/demo` → `/demo/index.html`
+- README links to Vercel placeholder URL with note to update after deploy
+
+**Verification status:**
+
+- Manual: open root `index.html` locally — redirects to demo
+- No backend or app code added
+
+**Assumptions made:**
+
+- Vercel project will be named `crucible-forge-demo` (`.vercel.app` subdomain in README)
+- Static file hosting only — no build step required
+
+**Recommended next step:**
+
+- Deploy to Vercel, confirm root URL loads demo, update README live link if project name differs; commit and push

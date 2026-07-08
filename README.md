@@ -5,13 +5,15 @@
 
 <p align="center">
   <a href="demo/index.html">Try the demo</a> ·
+  <a href="https://crucible-forge-demo.vercel.app">Live demo</a> ·
   <a href="docs/product/The-Crucible-Product-Overview.pdf">Product overview (PDF)</a> ·
   <a href="docs/diagrams/">Diagram sources</a> ·
   <a href="docs/ip-boundary.md">Public / private boundary</a>
 </p>
 
 <p align="center">
-  <sub>Early public showcase · Mock data only · Production implementation remains private</sub>
+  <sub>Early public showcase · Mock data only · Production implementation remains private</sub><br/>
+  <sub>Live URL: update <code>crucible-forge-demo.vercel.app</code> after Vercel deploy if your project name differs</sub>
 </p>
 
 ---
@@ -52,6 +54,8 @@ Exported from the [interactive concept demo](demo/index.html) — Canvas graph w
 ## Interactive Concept Demo
 
 **[Open `demo/index.html`](demo/index.html)** — static HTML/CSS/JS, no install, no backend.
+
+**Live (Vercel):** [https://crucible-forge-demo.vercel.app](https://crucible-forge-demo.vercel.app) — root URL redirects to the demo. *Update this link if your Vercel project name differs.*
 
 | Feature | Description |
 |---------|-------------|
